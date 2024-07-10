@@ -21,3 +21,8 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #03a9f4; 
 }
+
+#myPieChart {
+    max-width: 300px;
+    max-height: 300px;
+}
