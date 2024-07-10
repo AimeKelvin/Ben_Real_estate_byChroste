@@ -1,0 +1,165 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    padding: 20px;
+    text-align: center;
+    background-color: #34495e;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav ul li {
+    padding: 15px 20px;
+}
+
+.sidebar-nav ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.sidebar-nav ul li a:hover {
+    background-color: #1abc9c;
+}
+
+.main-content {
+    flex: 1;
+    background-color: #ecf0f1;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    padding: 20px;
+    background-color: #34495e;
+    color: white;
+    text-align: center;
+}
+
+.dashboard-widgets {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 20px;
+}
+
+.widget {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(25% - 40px);
+    text-align: center;
+}
+
+.post-management {
+    padding: 20px;
+    background-color: white;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-management form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.post-management form label {
+    margin-top: 10px;
+}
+
+.post-management form input,
+.post-management form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.post-management form button {
+    padding: 10px;
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.post-management form button:hover {
+    background-color: #16a085;
+}
+
+.post-list {
+    margin-top: 20px;
+}
+
+.post-list .post {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-list .post button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.post-list .post button:hover {
+    background-color: #c0392b;
+}
+
+@media (max-width: 768px) {
+    .widget {
+        flex: 1 1 calc(50% - 40px);
+    }
+}
+
+@media (max-width: 480px) {
+    .widget {
+        flex: 1 1 100%;
+    }
+
+    .sidebar {
+        width: 100px;
+    }
+
+    .sidebar-header h2 {
+        font-size: 16px;
+    }
+
+    .sidebar-nav ul li {
+        padding: 10px 15px;
+    }
+}
