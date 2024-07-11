@@ -114,9 +114,9 @@
             <div class="h-full w-full p-[10px] md:p-[40px] pb-[50px] overflow-y-scroll md:w-[85%]">
                 <div class="text-[18px] font-black text-slate-300 select-none mb-[30px]">Admin Creation Page</div>
                 <div class="w-full flex flex-row items-center space-x-[20px] mt-[10px] mb-[20px]">
-                    <div><a href="#" class="bg-blue-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-car text-white font-bold"></i><span></span> Add Vehicle</a></div>
+                    <div><a href="../cars/create.php" class="bg-blue-300 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-car text-white font-bold"></i><span></span> Add Vehicle</a></div>
                     <div><a href="../houses/create.php" class="bg-blue-300 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-house text-white font-bold"></i><span></span> Add House</a></div>
-                    <div><a href="../apartments/create.php" class="bg-blue-300 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-building text-white font-bold"></i><span></span> Add Apartment</a></div>
+                    <div><a href="#" class="bg-blue-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-building text-white font-bold"></i><span></span> Add Apartment</a></div>
                 </div>
                 <!--No of images-->
                 <div id="images-number" class="p-[4px] mb-[3px] flex justify-center items-center w-[40px] bg-blue-500 rounded-full h-[40px] font-bold text-[16px] text-white">0</div>

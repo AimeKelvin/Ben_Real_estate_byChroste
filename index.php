@@ -46,11 +46,11 @@
             <ul
               class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
             >
-              <li class="active"><a href="index.html">Home</a></li>
-              <li><a href="services.html">Services</a></li>
-              <li><a href="properties.html">Properties</a></li>
+              <li class="active"><a href="index.php">Home</a></li>
+              <li><a href="services.php">Services</a></li>
+              <li><a href="properties.php">Properties</a></li>
               <li><a href="#about">About</a></li>
-              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="contact.php">Contact Us</a></li>
             </ul>
 
             <a
