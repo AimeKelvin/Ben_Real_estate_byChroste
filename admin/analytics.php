@@ -1,3 +1,51 @@
+<?php
+    session_start();
+
+    include '../config/db.php';
+
+    $admin_id = $_SESSION['id'];
+
+
+    if(!$admin_id || empty($admin_id)) {
+        $error_msg = "You have to login";
+        $encoded_error_msg = urlencode($error_msg);
+        header("location: login.php?error=$encoded_error_msg");
+        exit();
+    }
+
+
+    $fetch_admin = "SELECT * FROM `admins` WHERE `id` = ?";
+    $stmt = $connect->prepare($fetch_admin);
+
+    $stmt->bind_param('i', $admin_id);
+
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $fetch = $result->fetch_assoc();
+
+    //get default avatar
+
+    $fullname = $fetch['full_name'];
+
+
+
+    $fullNameArr = explode(" ", $fullname);
+    $firstWord = current($fullNameArr);
+    $lastWord  = end($fullNameArr);
+    $firstCharacter = substr($firstWord, 0, 1);
+    $lastCharacter = substr($lastWord, 0, 1);
+    $defaultProfile = strtoupper($firstCharacter.$lastCharacter);
+
+
+
+
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,10 +87,14 @@
             </div>
             <div class="flex flex-row spacex-x-[20px] items-center">
                 <div class="flex flex-row space-x-[10px] items-center border-r border-solid pr-[10px] border-slate-400">
-                    <div class="bg-blue-500 rounded-full w-[40px] h-[40px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white">B</div>
-                    <div class="font-bold text-[16px] select-none text-slate-900">Ben Ishimwe</div>
+                    <div class="bg-blue-500 rounded-full w-[40px] h-[40px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white"><?php echo $defaultProfile; ?></div>
+                    <div class="font-bold text-[16px] select-none text-slate-900"><?php echo $fullname; ?></div>
                 </div>
-                <div class="pl-[10px]"><button class="bg-red-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold">Logout</button></div>
+                <div class="pl-[10px]">
+                    <form action="../includes/admin/logout_inc.php" method="POST">
+                        <button type="submit" class="bg-red-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold" name="logout_btn">Logout</button>
+                    </form>
+                </div>
             </div>
         </div>
         <!--Navigation-->
