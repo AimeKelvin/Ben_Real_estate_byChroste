@@ -164,7 +164,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="text-[18px] font-black text-slate-300 select-none mt-[20px] mb-[30px]">Recent Added Listings</div>
+                    <div class="text-[18px] font-black text-slate-300 select-none mt-[20px] mb-[30px]">Recent Added Vehicles</div>
                     <div class="grid grid-cols-1 md:grid-cols-4 space-x-[4px]">
                         <?php
                             $fetch_cars = "SELECT * FROM `cars`";
