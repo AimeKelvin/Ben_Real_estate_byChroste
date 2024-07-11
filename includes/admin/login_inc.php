@@ -37,6 +37,16 @@
             }else{
                 $_SESSION['id'] = $fetch['id'];
 
+                //Save the history in the history table
+                $action = "New Login Session";
+                
+                $add_history = "INSERT INTO `history` (`action`) VALUES(?)";
+                $stmt = $connect->prepare($add_history);
+
+                $stmt->bind_param('s', $action);
+
+                $stmt->execute();
+
                 $success_msg = "You are Logined";
                 $encoded_success_msg = urlencode($success_msg);
                 header("location: ../../admin/analytics.php?error=$encoded_success_msg");
