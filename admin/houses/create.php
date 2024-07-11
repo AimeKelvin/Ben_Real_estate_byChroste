@@ -102,10 +102,10 @@
             <!--Side bar-->
             <div class="w-[15%] h-full hidden md:block border-r border-solid border-gray-300">
                 <div class="w-full h-full p-[20px] flex flex-col space-y-[20px]">
-                    <div class="hover:bg-slate-200 cursor-pointer p-[10px] rounded-[6px]"><a href="analytics.php" class="font-bold text-[16px] text-slate-400 flex flex-row items-center space-x-[6px]"><i class="fa-solid fa-chart-simple text-[16px] font-bold"></i><span></span> Analytics</a></div>
+                    <div class="hover:bg-slate-200 cursor-pointer p-[10px] rounded-[6px]"><a href="../analytics.php" class="font-bold text-[16px] text-slate-400 flex flex-row items-center space-x-[6px]"><i class="fa-solid fa-chart-simple text-[16px] font-bold"></i><span></span> Analytics</a></div>
                     <div class="bg-blue-500 text-white cursor-pointer p-[10px] rounded-[6px]"><a href="" class="font-bold text-[16px] flex flex-row items-center space-x-[6px]"><i class="fa-solid fa-square-plus text-[16px] font-bold"></i><span></span> Create</a></div>
-                    <div class="hover:bg-slate-200 cursor-pointer p-[10px] rounded-[6px]"><a href="manage.php" class="font-bold text-[16px] text-slate-400 flex flex-row items-center space-x-[6px]"><i class="fa-solid fa-list-check text-[16px] font-bold"></i><span></span> Management</a></div>
-                    <div class="hover:bg-slate-200 cursor-pointer p-[10px] rounded-[6px]"><a href="history.php" class="font-bold text-[16px] text-slate-400 flex flex-row items-center space-x-[6px]"><i class="fa-solid fa-trash text-[16px] font-bold"></i><span></span> History</a></div>
+                    <div class="hover:bg-slate-200 cursor-pointer p-[10px] rounded-[6px]"><a href="../manage.php" class="font-bold text-[16px] text-slate-400 flex flex-row items-center space-x-[6px]"><i class="fa-solid fa-list-check text-[16px] font-bold"></i><span></span> Management</a></div>
+                    <div class="hover:bg-slate-200 cursor-pointer p-[10px] rounded-[6px]"><a href="../history.php" class="font-bold text-[16px] text-slate-400 flex flex-row items-center space-x-[6px]"><i class="fa-solid fa-trash text-[16px] font-bold"></i><span></span> History</a></div>
                 </div>
             </div>
             <!--Side bar-->
@@ -114,8 +114,8 @@
             <div class="h-full w-full p-[10px] md:p-[40px] pb-[50px] overflow-y-scroll md:w-[85%]">
                 <div class="text-[18px] font-black text-slate-300 select-none mb-[30px]">Admin Creation Page</div>
                 <div class="w-full flex flex-row items-center space-x-[20px] mt-[10px] mb-[20px]">
-                    <div><a href="#" class="bg-blue-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-car text-white font-bold"></i><span></span> Add Vehicle</a></div>
-                    <div><a href="../houses/create.php" class="bg-blue-300 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-house text-white font-bold"></i><span></span> Add House</a></div>
+                    <div><a href="../cars/create.php" class="bg-blue-300 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-car text-white font-bold"></i><span></span> Add Vehicle</a></div>
+                    <div><a href="#" class="bg-blue-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-house text-white font-bold"></i><span></span> Add House</a></div>
                     <div><a href="../apartments/create.php" class="bg-blue-300 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-building text-white font-bold"></i><span></span> Add Apartment</a></div>
                 </div>
                 <!--No of images-->

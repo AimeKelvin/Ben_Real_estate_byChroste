@@ -177,66 +177,40 @@
                         <div class="text-[14px] font-bold text-slate-300 border-b border-solid border-gray-300 select-none">Contact Feedback</div>
                         <!--Feedbacks-->
 
-                        <div class="w-full p-[15px]">
-                            <div class="flex flex-row space-x-[20px]">
-                                <div>
-                                    <div class="bg-sky-500 rounded-full w-[30px] h-[30px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white">L</div>
-                                </div>
-                                <div class="flex flex-col">
-                                    <div class="text-[14px] font-bold text-slate-300 select-none">Caleb | caleb@gmail.com</div>
-                                    <div class="text-[16px] font-bold text-pink-500 select-none">Ndashaka inzu</div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php
+                            $fetch_feedback = "SELECT * FROM `feedback`";
 
-                        <div class="w-full p-[15px]">
-                            <div class="flex flex-row space-x-[20px]">
-                                <div>
-                                    <div class="bg-sky-500 rounded-full w-[30px] h-[30px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white">L</div>
-                                </div>
-                                <div class="flex flex-col">
-                                    <div class="text-[14px] font-bold text-slate-300 select-none">Caleb | caleb@gmail.com</div>
-                                    <div class="text-[16px] font-bold text-pink-500 select-none">Ndashaka inzu</div>
-                                </div>
-                            </div>
-                        </div>
+                            $stmt = $connect->prepare($fetch_feedback);
+    
+                            $stmt->execute();
+    
+                            $result = $stmt->get_result();
 
-                        <div class="w-full p-[15px]">
-                            <div class="flex flex-row space-x-[20px]">
-                                <div>
-                                    <div class="bg-sky-500 rounded-full w-[30px] h-[30px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white">L</div>
-                                </div>
-                                <div class="flex flex-col">
-                                    <div class="text-[14px] font-bold text-slate-300 select-none">Caleb | caleb@gmail.com</div>
-                                    <div class="text-[16px] font-bold text-pink-500 select-none">Ndashaka inzu</div>
-                                </div>
-                            </div>
-                        </div>
+                            
+                            if(mysqli_num_rows($result) > 0) {
+                                while($fetch = $result->fetch_assoc()) {
+                                    echo '
+                                        <div class="w-full p-[15px]">
+                                            <div class="flex flex-row space-x-[20px]">
+                                                <div>
+                                                    <div class="bg-sky-500 rounded-full w-[30px] h-[30px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white">L</div>
+                                                </div>
+                                                <div class="flex flex-col">
+                                                    <div class="text-[14px] font-bold text-slate-300 select-none">' .$fetch['name']. ' | ' .$fetch['email']. '</div>
+                                                    <div class="text-[16px] font-bold text-pink-500 select-none">' .$fetch['message']. '</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ';
+                                }
+                            }else {
+                                echo '
+                                    <div class="text-[18px] font-black text-center text-slate-900 select-none md-[4px]">No Feedback</div>
 
-                        <div class="w-full p-[15px]">
-                            <div class="flex flex-row space-x-[20px]">
-                                <div>
-                                    <div class="bg-sky-500 rounded-full w-[30px] h-[30px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white">L</div>
-                                </div>
-                                <div class="flex flex-col">
-                                    <div class="text-[14px] font-bold text-slate-300 select-none">Caleb | caleb@gmail.com</div>
-                                    <div class="text-[16px] font-bold text-pink-500 select-none">Ndashaka inzu</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="w-full p-[15px]">
-                            <div class="flex flex-row space-x-[20px]">
-                                <div>
-                                    <div class="bg-sky-500 rounded-full w-[30px] h-[30px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white">L</div>
-                                </div>
-                                <div class="flex flex-col">
-                                    <div class="text-[14px] font-bold text-slate-300 select-none">Caleb | caleb@gmail.com</div>
-                                    <div class="text-[16px] font-bold text-pink-500 select-none">Ndashaka inzu</div>
-                                </div>
-                            </div>
-                        </div>
-
+                                ';
+                            } 
+                        ?>
+                       
                         <!--Feedbacks-->
                     </div>
                     <div class="border-[2px] w-full h-[400px] border-solid flex justify-center items-center border-gray-300 p-[20px] rounded-[6px] md:w-[50%]">
