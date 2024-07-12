@@ -177,10 +177,15 @@
 
                             if(mysqli_num_rows($result) > 0) {
                                 while($fetch = $result->fetch_assoc()) {
+                                    $images = json_decode($fetch['images']);
+
+                                    if (is_array($images) && count($images) > 0) {
+                                        $thumbnail = $images[0];
+                                    }
                                     echo '
                                         <div class="w-full bg-white/[90%] p-[5px] rounded-[4px] md:w-[100%] flex flex-col">
                                             <div class="w-full h-[200px]">
-                                                <img src="../../images/hero_bg_3.jpg" class="w-full rounded-[6px] h-full object-cover object-center" alt="Product">
+                                                <img src="../../includes/admin/uploaded_cars/' .$thumbnail. '" class="w-full rounded-[6px] h-full object-cover object-center" alt="Product">
                                             </div>
                                             <div class="p-[10px] rounded-[4px]">
                                                 <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">' .$fetch['car_price']. '</div>
