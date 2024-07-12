@@ -185,8 +185,9 @@
                                     $total_prices = $row['total_prices'];
 
                                     $formatted_total_prices_cars = rtrim(rtrim($total_prices, '0'), '.');
+                                    
 
-                                    $sum_up = $formatted_total_prices_houses + $formatted_total_prices_apartments + $formatted_total_prices_cars;
+                                    $sum_up = (int)$formatted_total_prices_houses + (int)$formatted_total_prices_apartments + (int)$formatted_total_prices_cars;
 
 
                             ?>

@@ -51,7 +51,7 @@
       <div class="container">
         <div class="menu-bg-wrap">
           <div class="site-navigation">
-            <a href="index.html" class="logo m-0 float-start">Ben Real Estate.</a>
+            <a href="index.php" class="logo m-0 float-start">Ben Real Estate.</a>
 
             <ul
               class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
@@ -90,7 +90,7 @@
               data-aos-delay="200"
             >
               <ol class="breadcrumb text-center justify-content-center">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                 <li
                   class="breadcrumb-item active text-white-50"
                   aria-current="page"
@@ -137,7 +137,7 @@
                           echo '
                                 <div class="property-item">
                                   <a href="property-single.html" class="img">
-                                    <img src="./includes/admin/uploaded_houses/' .$thumbnail. '" alt="Image" class="img-fluid" />
+                                    <img src="./includes/admin/uploaded_houses/' .$thumbnail. '" alt="Image" style="width: 100%; height: 370px; object-fit: cover; object-position: 50% 50%;" class="img-fluid" />
                                   </a>
 
                                   <div class="property-content">
@@ -160,7 +160,7 @@
                                       </div>
 
                                       <a
-                                        href="property-single.html"
+                                        href="single-house.php?house=' .$fetch['id']. '"
                                         class="btn btn-primary py-2 px-3"
                                         >See details</a
                                       >
@@ -269,7 +269,7 @@
                               </div>
 
                               <a
-                                href="property-single.html"
+                                href="single-house.php?house=' .$fetch['id']. '"
                                 class="btn btn-primary py-2 px-3"
                                 >See details</a
                               >
@@ -377,7 +377,7 @@
                               </div>
 
                               <a
-                                href="property-single.html"
+                                href="single-car.php?car=' .$fetch['id']. '"
                                 class="btn btn-primary py-2 px-3"
                                 >See details</a
                               >
@@ -485,7 +485,7 @@
                               </div>
 
                               <a
-                                href="property-single.html"
+                                href="single-apart.php?apart=' .$fetch['id']. '"
                                 class="btn btn-primary py-2 px-3"
                                 >See details</a
                               >

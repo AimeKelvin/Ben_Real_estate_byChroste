@@ -1,3 +1,37 @@
+<?php
+  include './config/db.php';
+
+
+    if(isset($_GET['house'])) {
+      $house_id = $_GET['house'];
+
+      //fetch the details for the car
+      $sql = "SELECT * FROM `houses` WHERE `id` = ?";
+      $stmt = $connect->prepare($sql);
+
+      $stmt->bind_param('i', $house_id);
+      $stmt->execute();
+
+      $output = $stmt->get_result();
+      $output_fetch = $output->fetch_assoc();
+
+      $house_title = $output_fetch['house_title'];
+
+      if(!$output_fetch) {
+          header('location: error.php');
+          exit();
+      }
+
+      $stmt->close();
+
+  }else{
+      header('location: error.php');
+      exit();
+  }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -71,7 +105,7 @@
         <div class="row justify-content-center align-items-center">
           <div class="col-lg-9 text-center mt-5">
             <h1 class="heading" data-aos="fade-up">
-              5232 California AVE. 21BC
+              <?php echo $house_title; ?>
             </h1>
 
             <nav
