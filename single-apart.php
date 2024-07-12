@@ -1,3 +1,38 @@
+<?php
+    include './config/db.php';
+
+
+    if(isset($_GET['apart'])) {
+      $apartment_id = $_GET['apart'];
+
+      //fetch the details for the car
+      $sql = "SELECT * FROM `apartments` WHERE `id` = ?";
+      $stmt = $connect->prepare($sql);
+
+      $stmt->bind_param('i', $apartment_id);
+      $stmt->execute();
+
+      $output = $stmt->get_result();
+      $output_fetch = $output->fetch_assoc();
+
+      $apart_title = $output_fetch['apartment_title'];
+
+      if(!$output_fetch) {
+          header('location: error.php');
+          exit();
+      }
+
+      $stmt->close();
+
+    }else{
+      header('location: error.php');
+      exit();
+    }
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,7 +58,7 @@
     <link rel="stylesheet" href="css/aos.css" />
     <link rel="stylesheet" href="css/style.css" />
 
-    <title>Contact</title>
+    <title>Inzu Kibagabaga</title>
   </head>
   <body>
     <div class="site-mobile-menu site-navbar-target">
@@ -39,7 +74,7 @@
       <div class="container">
         <div class="menu-bg-wrap">
           <div class="site-navigation">
-            <a href="index.php" class="logo m-0 float-start">Ben Estate</a>
+            <a href="index.html" class="logo m-0 float-start">Ben Real Estate.</a>
 
             <ul
               class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
@@ -47,7 +82,7 @@
               <li><a href="index.php">Home</a></li>
               <li><a href="services.php">Services</a></li>
               <li><a href="properties.php">Properties</a></li>
-              <li class="active"><a href="contact.php">Contact Us</a></li>
+              <li><a href="contact.php">Contact Us</a></li>
             </ul>
 
             <a
@@ -65,12 +100,14 @@
 
     <div
       class="hero page-inner overlay"
-      style="background-image: url('images/hero_bg_1.jpg')"
+      style="background-image: url('images/hero_bg_3.jpg')"
     >
       <div class="container">
         <div class="row justify-content-center align-items-center">
           <div class="col-lg-9 text-center mt-5">
-            <h1 class="heading" data-aos="fade-up">Contact Us</h1>
+            <h1 class="heading" data-aos="fade-up">
+              <?php echo $apart_title; ?>
+            </h1>
 
             <nav
               aria-label="breadcrumb"
@@ -78,12 +115,15 @@
               data-aos-delay="200"
             >
               <ol class="breadcrumb text-center justify-content-center">
-                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item">
+                  <a href="properties.html">Properties</a>
+                </li>
                 <li
                   class="breadcrumb-item active text-white-50"
                   aria-current="page"
                 >
-                  Contact
+                  5232 California AVE. 21BC
                 </li>
               </ol>
             </nav>
@@ -94,71 +134,66 @@
 
     <div class="section">
       <div class="container">
-        <div class="row">
-          <div
-            class="col-lg-4 mb-5 mb-lg-0"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <div class="contact-info">
-              <div class="address mt-2">
-                <i class="icon-room"></i>
-                <h4 class="mb-2">Location:</h4>
-                <p>
-                  43 Raymouth Rd. Baltemoer,<br />
-                  London 3910
-                </p>
-              </div>
-
-              <div class="open-hours mt-4">
-                <i class="icon-clock-o"></i>
-                <h4 class="mb-2">Open Hours:</h4>
-                <p>
-                  Sunday-Friday:<br />
-                  11:00 AM - 2300 PM
-                </p>
-              </div>
-
-              <div class="email mt-4">
-                <i class="icon-envelope"></i>
-                <h4 class="mb-2">Email:</h4>
-                <p>info@Untree.co</p>
-              </div>
-
-              <div class="phone mt-4">
-                <i class="icon-phone"></i>
-                <h4 class="mb-2">Call:</h4>
-                <p>+1 1234 55488 55</p>
+        <div class="row justify-content-between">
+          <div class="col-lg-7">
+            <div class="img-property-slide-wrap">
+              <div class="img-property-slide">
+                <img src="images/img_1.jpg" alt="Image" class="img-fluid" />
+                <img src="images/img_2.jpg" alt="Image" class="img-fluid" />
+                <img src="images/img_3.jpg" alt="Image" class="img-fluid" />
               </div>
             </div>
           </div>
-          <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-            <form action="./includes/client/send_feedback_inc.php" method="POST">
-              <div class="row">
-                <div class="col-6 mb-3">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name"/>
-                </div>
-                <div class="col-6 mb-3">
-                  <input type="email" name="email" class="form-control" placeholder="Your Email"
-                  />
-                </div>
-                <div class="col-12 mb-3">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject"/>
-                </div>
-                <div class="col-12 mb-3">
-                  <textarea name="msg" id="" cols="30" rows="7" class="form-control"placeholder="Message"></textarea>
-                </div>
+          <div class="col-lg-4">
+            <h2 class="heading text-primary">5232 California Ave. 21BC</h2>
+            <p class="meta">California, United States</p>
+            <p class="text-black-50">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione
+              laborum quo quos omnis sed magnam id, ducimus saepe, debitis error
+              earum, iste dicta odio est sint dolorem magni animi tenetur.
+            </p>
+            <p class="text-black-50">
+              Perferendis eligendi reprehenderit, assumenda molestias nisi eius
+              iste reiciendis porro tenetur in, repudiandae amet libero.
+              Doloremque, reprehenderit cupiditate error laudantium qui, esse
+              quam debitis, eum cumque perferendis, illum harum expedita.
+            </p>
 
-                <div class="col-12">
-                  <input type="submit" name="send_btn" value="Send Message"class="btn btn-primary"/>
-                </div>
+            <div class="d-block agent-box p-5">
+              <div class="img mb-4">
+                <img
+                  src="images/person_2-min.jpg"
+                  alt="Image"
+                  class="img-fluid"
+                />
               </div>
-            </form>
+              <div class="text">
+                <h3 class="mb-0">Alicia Huston</h3>
+                <div class="meta mb-3">Real Estate</div>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Ratione laborum quo quos omnis sed magnam id ducimus saepe
+                </p>
+                <ul class="list-unstyled social dark-hover d-flex">
+                  <li class="me-1">
+                    <a href="#"><span class="icon-instagram"></span></a>
+                  </li>
+                  <li class="me-1">
+                    <a href="#"><span class="icon-twitter"></span></a>
+                  </li>
+                  <li class="me-1">
+                    <a href="#"><span class="icon-facebook"></span></a>
+                  </li>
+                  <li class="me-1">
+                    <a href="#"><span class="icon-linkedin"></span></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- /.untree_co-section -->
 
     <div class="site-footer">
       <div class="container">
