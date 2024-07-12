@@ -121,49 +121,166 @@
                     <!--details-->
                         <!--detail one-->
                         <div class="w-full border-[2px] border-solid border-gray-300 flex flex-col items-center p-[15px] rounded-[12px]">
+                            <?php
+                                $query = "SELECT COUNT(*) AS total FROM `sales`";
+                                $stmt = $connect->prepare($query);
+                                
+                                $stmt->execute();
+
+                                
+                                $result = $stmt->get_result();
+                                $row = $result->fetch_assoc();
+
+                                
+                                $total_sales = $row['total'];
+                                
+                                
+                            
+                            ?>
                             <div class="flex flex-row items-center mb-[20px]">
                                 <div class="bg-pink-500 rounded-full w-[40px] h-[40px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white">S</div>
                                 <div class="text-[16px] font-bold text-slate-500 select-none pl-[10px]">Total Sales</div>
                             </div>
                             <div class="flex justify-between items-center space-x-[20px]">
-                                <div class="text-[32px] font-black text-slate-900 select-none border-r border-solid border-gray-300 pr-[10px]">120</div>
+                                <div class="text-[32px] font-black text-slate-900 select-none border-r border-solid border-gray-300 pr-[10px]"><?php echo $total_sales; ?></div>
                                 <div class="text-[16px] font-bold text-pink-500 select-none pl-[10px]">Total Sales</div>
                             </div>
                         </div>
                         <!--detail one-->
                         <!--detail one-->
                         <div class="w-full border-[2px] border-solid border-gray-300 flex flex-col items-center p-[15px] rounded-[12px]">
+                            <?php
+                                    $query = "SELECT SUM(CAST(REPLACE(TRIM(LEADING '$' FROM house_price), ',', '') AS DECIMAL(10, 2))) AS total_prices FROM `houses`";
+
+                                    $result = $connect->query($query);
+
+
+                                    $row = $result->fetch_assoc();
+
+                                    $total_prices = $row['total_prices'];
+
+                                    $formatted_total_prices_houses = rtrim(rtrim($total_prices, '0'), '.');
+
+                                    //apartments 
+                                    $query = "SELECT SUM(CAST(REPLACE(TRIM(LEADING '$' FROM apartment_price), ',', '') AS DECIMAL(10, 2))) AS total_prices FROM `apartments`";
+
+                                    $result = $connect->query($query);
+
+
+                                    $row = $result->fetch_assoc();
+
+                                    $total_prices = $row['total_prices'];
+
+                                    $formatted_total_prices_apartments = rtrim(rtrim($total_prices, '0'), '.');
+
+
+                                    //cars
+                                    $query = "SELECT SUM(CAST(REPLACE(TRIM(LEADING '$' FROM car_price), ',', '') AS DECIMAL(10, 2))) AS total_prices FROM `cars`";
+
+                                    $result = $connect->query($query);
+
+
+                                    $row = $result->fetch_assoc();
+
+                                    $total_prices = $row['total_prices'];
+
+                                    $formatted_total_prices_cars = rtrim(rtrim($total_prices, '0'), '.');
+
+                                    $sum_up = $formatted_total_prices_houses + $formatted_total_prices_apartments + $formatted_total_prices_cars;
+
+
+                            ?>
                             <div class="flex flex-row items-center mb-[20px]">
                                 <div class="bg-yellow-500 rounded-full w-[40px] h-[40px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white">M</div>
                                 <div class="text-[16px] font-bold text-slate-500 select-none pl-[10px]">Total Income</div>
                             </div>
                             <div class="flex justify-between items-center space-x-[20px]">
-                                <div class="text-[32px] font-black text-slate-900 select-none border-r border-solid border-gray-300 pr-[10px]">$ 120</div>
+                                <div class="text-[32px] font-black text-slate-900 select-none border-r border-solid border-gray-300 pr-[10px]"><?php echo $sum_up; ?></div>
                                 <div class="text-[16px] font-bold text-yellow-500 select-none pl-[10px]">Total Income</div>
                             </div>
                         </div>
                         <!--detail one-->
                         <!--detail one-->
                         <div class="w-full border-[2px] border-solid border-gray-300 flex flex-col items-center p-[15px] rounded-[12px]">
+                            <?php
+                                $query = "SELECT COUNT(*) AS total FROM `houses`";
+                                $stmt = $connect->prepare($query);
+                                
+                                $stmt->execute();
+
+                                
+                                $result = $stmt->get_result();
+                                $row = $result->fetch_assoc();
+
+                                $total_rows_houses = $row['total'];
+                                //end
+
+                                $query = "SELECT COUNT(*) AS total FROM `apartments`";
+                                $stmt = $connect->prepare($query);
+                                
+                                $stmt->execute();
+
+                                
+                                $result = $stmt->get_result();
+                                $row = $result->fetch_assoc();
+
+                                
+                                $total_rows_apartments = $row['total'];
+                                //end
+
+                                $query = "SELECT COUNT(*) AS total FROM `cars`";
+                                $stmt = $connect->prepare($query);
+                                
+                                $stmt->execute();
+
+                                
+                                $result = $stmt->get_result();
+                                $row = $result->fetch_assoc();
+
+                                
+                                $total_rows_cars = $row['total'];
+                                //end
+
+                                $total_listings = $total_rows_houses + $total_rows_apartments + $total_rows_cars;
+                                
+                                
+                            
+                            ?>
                             <div class="flex flex-row items-center mb-[20px]">
                                 <div class="bg-sky-500 rounded-full w-[40px] h-[40px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white">L</div>
                                 <div class="text-[16px] font-bold text-slate-500 select-none pl-[10px]">Total Listings</div>
                             </div>
                             <div class="flex justify-between items-center space-x-[20px]">
-                                <div class="text-[32px] font-black text-slate-900 select-none border-r border-solid border-gray-300 pr-[10px]">120</div>
+                                <div class="text-[32px] font-black text-slate-900 select-none border-r border-solid border-gray-300 pr-[10px]"><?php echo $total_listings; ?></div>
                                 <div class="text-[16px] font-bold text-sky-500 select-none pl-[10px]">Total Listings</div>
                             </div>
                         </div>
                         <!--detail one-->
                         <!--detail one-->
                         <div class="w-full border-[2px] border-solid border-gray-300 flex flex-col items-center p-[15px] rounded-[12px]">
+                            <?php
+                                $query = "SELECT COUNT(*) AS total FROM `history`";
+                                $stmt = $connect->prepare($query);
+                                
+                                $stmt->execute();
+
+                                
+                                $result = $stmt->get_result();
+                                $row = $result->fetch_assoc();
+
+                                
+                                $total_rows = $row['total'];
+                                
+                                
+                            
+                            ?>
                             <div class="flex flex-row items-center mb-[20px]">
-                                <div class="bg-red-500 rounded-full w-[40px] h-[40px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white">P</div>
-                                <div class="text-[16px] font-bold text-slate-500 select-none pl-[10px]">Total Listings</div>
+                                <div class="bg-red-500 rounded-full w-[40px] h-[40px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white">N</div>
+                                <div class="text-[16px] font-bold text-slate-500 select-none pl-[10px]">History Records</div>
                             </div>
                             <div class="flex justify-between items-center space-x-[20px]">
-                                <div class="text-[32px] font-black text-slate-900 select-none border-r border-solid border-gray-300 pr-[10px]">120</div>
-                                <div class="text-[16px] font-bold text-red-500 select-none pl-[10px]">Total Listings</div>
+                                <div class="text-[32px] font-black text-slate-900 select-none border-r border-solid border-gray-300 pr-[10px]"><?php echo $total_rows; ?></div>
+                                <div class="text-[16px] font-bold text-red-500 select-none pl-[10px]">Total Records</div>
                             </div>
                         </div>
                         <!--detail one-->
@@ -174,7 +291,23 @@
                 <div class="text-[18px] font-black text-slate-300 select-none mt-[30px] mb-[30px]">Feedback and Listings Analysis</div>
                 <div class="flex flex-col w-full space-x-[0px] space-y-[5px] md:space-y-[0px] md:space-x-[5px] md:flex-row">
                     <div class="border-[2px] w-full h-[400px] border-solid border-gray-300 p-[20px] overflow-y-scroll rounded-[6px] md:md:w-[50%]">
-                        <div class="text-[14px] font-bold text-slate-300 border-b border-solid border-gray-300 select-none">Contact Feedback</div>
+                        <?php
+                                $query = "SELECT COUNT(*) AS total FROM `feedback`";
+                                $stmt = $connect->prepare($query);
+                                
+                                $stmt->execute();
+
+                                
+                                $result = $stmt->get_result();
+                                $row = $result->fetch_assoc();
+
+                                
+                                $total_feedback = $row['total'];
+                                
+                                
+                            
+                        ?>
+                        <div class="text-[14px] font-bold text-slate-300 border-b border-solid border-gray-300 select-none">Contact Feedback (<?php echo $total_feedback; ?>)</div>
                         <!--Feedbacks-->
 
                         <?php
@@ -222,59 +355,52 @@
                     </div>
                 </div>
                 <!--Feedback and Piechart-->
+                
 
                 <!--Previous listings-->
                 <div>
-                    <div class="text-[18px] font-black text-slate-300 select-none mt-[20px] mb-[30px]">Your Previous Listings</div>
+                    <div class="text-[18px] font-black text-slate-300 select-none mt-[20px] mb-[30px]">Recent Added Houses</div>
                     <div class="grid grid-cols-1 md:grid-cols-4 space-x-[4px]">
-                        <!--Product One-->
-                        <div class="w-full bg-white/[90%] p-[5px] rounded-[4px] md:w-[100%] flex flex-col">
-                            <div class="w-full h-[200px]">
-                                <img src="../images/hero_bg_1.jpg" class="w-full rounded-[6px] h-full object-cover object-center" alt="Product">
-                            </div>
-                            <div class="p-[10px] rounded-[4px]">
-                                <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">$300</div>
-                                <p class="font-md text-[14px] text-slate-500 select-none text-start">Upload an Image file of your product here...</p>
-                                <a href="" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <!--Product One-->
-                        <!--Product Two-->
-                        <div class="w-full bg-white/[90%] p-[5px] rounded-[4px] md:w-[100%] flex flex-col">
-                            <div class="w-full h-[200px]">
-                                <img src="../images/hero_bg_2.jpg" class="w-full rounded-[6px] h-full object-cover object-center" alt="Product">
-                            </div>
-                            <div class="p-[10px] rounded-[4px]">
-                                <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">$300</div>
-                                <p class="font-md text-[14px] text-slate-500 select-none text-start">Upload an Image file of your product here...</p>
-                                <a href="" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <!--Product Two-->
-                        <!--Product Three-->
-                        <div class="w-full bg-white/[90%] p-[5px] rounded-[4px] md:w-[100%] flex flex-col">
-                            <div class="w-full h-[200px]">
-                                <img src="../images/hero_bg_3.jpg" class="w-full rounded-[6px] h-full object-cover object-center" alt="Product">
-                            </div>
-                            <div class="p-[10px] rounded-[4px]">
-                                <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">$300</div>
-                                <p class="font-md text-[14px] text-slate-500 select-none text-start">Upload an Image file of your product here...</p>
-                                <a href="" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <!--Product Three-->
-                        <!--Product Four-->
-                        <div class="w-full bg-white/[90%] p-[5px] rounded-[4px] md:w-[100%] flex flex-col">
-                            <div class="w-full h-[200px]">
-                                <img src="../images/hero_bg_1.jpg" class="w-full rounded-[6px] h-full object-cover object-center" alt="Product">
-                            </div>
-                            <div class="p-[10px] rounded-[4px]">
-                                <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">$300</div>
-                                <p class="font-md text-[14px] text-slate-500 select-none text-start">Upload an Image file of your product here...</p>
-                                <a href="" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <!--Product Four-->
+                        <?php
+                            $fetch_houses = "SELECT * FROM `houses`";
+
+                            $stmt = $connect->prepare($fetch_houses);
+    
+                            $stmt->execute();
+    
+                            $result = $stmt->get_result();
+
+                            if(mysqli_num_rows($result) > 0) {
+                                while($fetch = $result->fetch_assoc()) {
+                                    $images = json_decode($fetch['images']);
+
+                                    if (is_array($images) && count($images) > 0) {
+                                        $thumbnail = $images[0];
+                                    }
+                                    echo '
+                                        <div class="w-full bg-white/[90%] p-[5px] rounded-[4px] md:w-[100%] flex flex-col">
+                                            <div class="w-full h-[200px]">
+                                                <img src="../includes/admin/uploaded_houses/' .$thumbnail. '" class="w-full rounded-[6px] h-full object-cover object-center" alt="Product">
+                                            </div>
+                                            <div class="p-[10px] rounded-[4px]">
+                                                <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">' .$fetch['house_price']. '</div>
+                                                <p class="font-md text-[14px] text-slate-500 select-none text-start">Upload an Image file of your product here...</p>
+                                                <a href="./houses/single_listing_house.php?id=' .$fetch['id']. '" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
+                                            </div>
+                                        </div>
+                                    
+                                    
+                                    ';
+                                }
+                            }else {
+                                echo '
+                                    <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">No Cars Added</div>
+
+                                ';
+                            }
+                        
+                        ?>
+
                     </div>
                 </div>
                 <!--Previous listings-->
@@ -289,21 +415,28 @@
         // Get the context of the canvas element we want to select
         var ctx = document.getElementById('myPieChart').getContext('2d');
         
+        // Define the data for the chart
+        var housesTotal = <?php echo $total_rows_houses; ?>; // PHP variable for houses total
+        var apartmentsTotal = <?php echo $total_rows_apartments; ?>; // PHP variable for apartments total
+        var carsTotal = <?php echo $total_rows_cars; ?>; // PHP variable for cars total
+        
         // Create the pie chart
         var myPieChart = new Chart(ctx, {
             type: 'pie',  // Specify the chart type
             data: {
-                labels: ['Cars', 'Houses'],  // Labels for the pie slices
+                labels: ['Cars', 'Houses', 'Apartments'],  // Labels for the pie slices
                 datasets: [{
                     label: 'Distribution',
-                    data: [60, 40],  // Data values for each slice
+                    data: [carsTotal, housesTotal, apartmentsTotal],  // Data values for each slice
                     backgroundColor: [
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)'
+                        'rgba(54, 162, 235, 0.2)',  // Color for Cars
+                        'rgba(255, 206, 86, 0.2)',  // Color for Houses
+                        'rgba(0, 192, 0, 0.2)'   // Color for Apartments
                     ],
                     borderColor: [
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)'
+                        'rgba(54, 162, 235, 1)',    // Border color for Cars
+                        'rgba(255, 206, 86, 1)',    // Border color for Houses
+                        'rgba(0, 192, 0, 1)'     // Border color for Apartments
                     ],
                     borderWidth: 1
                 }]
@@ -316,12 +449,13 @@
                     },
                     title: {
                         display: true,
-                        text: 'Cars vs. Houses'  // Title of the chart
+                        text: 'Overview of listings'  // Title of the chart
                     }
                 }
             }
         });
     </script>
+
     
 </body>
 </html>

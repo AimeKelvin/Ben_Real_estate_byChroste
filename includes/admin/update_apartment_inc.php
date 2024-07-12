@@ -1,45 +1,46 @@
 <?php
     include '../../config/db.php';
 
-    if(isset($_POST['update_house_btn'])) {
-        $house_title = filter_var($_POST['house_title'], FILTER_SANITIZE_SPECIAL_CHARS);
-        $house_price = $_POST['price'];
+    if(isset($_POST['update_apartment_btn'])) {
+        $apartment_title = filter_var($_POST['apartment_title'], FILTER_SANITIZE_SPECIAL_CHARS);
+        $apartment_price = $_POST['price'];
         $number_rooms = $_POST['number_rooms'];
-        $house_des = $_POST['description'];
+        $apartment_des = $_POST['description'];
         $number_bed_rooms = $_POST['number_bed_rooms'];
-        $house_status = $_POST['status'];
-        $house_id = $_POST['id'];
+        $apartment_status = $_POST['status'];
 
-        $total_files = count($_FILES['house_image']['name']);
+        $apartment_id = $_POST['id'];
+
+        $total_files = count($_FILES['apartment_image']['name']);
         $files_array = array();
 
         //loop over them
         for($i = 0; $i < $total_files; $i++) {
-            $image_name = $_FILES['house_image']['name'][$i];
-            $tmp_name = $_FILES['house_image']['tmp_name'][$i];
+            $image_name = $_FILES['apartment_image']['name'][$i];
+            $tmp_name = $_FILES['apartment_image']['tmp_name'][$i];
 
             $image_ext = explode('.', $image_name);
             $image_ext = strtolower(end($image_ext));
 
             $new_img_name = uniqid() . '.' . $image_ext;
 
-            move_uploaded_file($tmp_name, 'uploaded_houses/' . $new_img_name);
+            move_uploaded_file($tmp_name, 'uploaded_apartments/' . $new_img_name);
             //push them to files array
             $files_array[] = $new_img_name;
         }
 
         $files_array = json_encode($files_array);
-
-        if(empty($house_title) || empty($house_price) || empty($number_rooms) || empty($house_des) || empty($number_bed_rooms) || empty($house_status)) {
+   
+        if(empty($apartment_title) || empty($apartment_price) || empty($number_rooms) || empty($apartment_des) || empty($number_bed_rooms) || empty($apartment_status)) {
             $error_msg = "Fill all fields please";
             $encoded_error_msg = urlencode($error_msg);
-            header("location: ../../admin/houses/single_listing_house.php?id=$house_id?error=$encoded_error_msg");
+            header("location: ../../admin/apartments/single_listing_apartment.php?id=$apartment_id?error=$encoded_error_msg");
             exit();
         }else {
-            $update_query = "UPDATE `houses` SET `house_title`=?, `house_price`=?,  `house_des`=?,  `number_rooms`=?,  `number_bedrooms`=?,  `status`=?,  `images`=? WHERE `id` = ?";
+            $update_query = "UPDATE `apartments` SET `apartment_title`=?, `apartment_price`=?,  `apartment_des`=?,  `number_rooms`=?, `number_bedrooms`=?, `status`=?,  `images`=? WHERE `id` = ?";
             $stmt = $connect->prepare($update_query);
 
-            $stmt->bind_param('ssssssss', $house_title, $house_price, $house_des,  $number_rooms, $number_bed_rooms, $house_status, $files_array, $house_id);
+            $stmt->bind_param('ssssssss', $apartment_title, $apartment_price, $apartment_des,  $number_rooms, $number_bed_rooms, $apartment_status, $files_array, $apartment_id);
 
             $stmt->execute();
 
@@ -47,12 +48,12 @@
                 move_uploaded_file($profile_img_tmp, $profile_img_directory);
                 $success_msg = "Listing updated";
                 $encoded_success_msg = urlencode($success_msg);
-                header("location: ../../admin/houses/single_listing_house.php?id=$house_id?error=$encoded_success_msg");
+                header("location: ../../admin/apartments/single_listing_apartment.php?id=$apartment_id?error=$encoded_success_msg");
                 exit();
             }else{
                 $error_msg = "Something went wrong";
                 $encoded_error_msg = urlencode($error_msg);
-                header("location: ../../admin/houses/single_listing_house.php?id=$house_id?error=$encoded_error_msg");
+                header("location: ../../admin/apartments/single_listing_apartment.php?id=$apartment_id?error=$encoded_error_msg");
                 exit();
             }
 
@@ -66,34 +67,34 @@
     //delete house
     
     if(isset($_POST['delete_listing_btn'])) {
-        $house_id = $_POST['id'];
+        $apartment_id = $_POST['id'];
 
         // Retrieve the images from the database
-        $select_query = "SELECT images FROM houses WHERE id = ?";
+        $select_query = "SELECT images FROM apartments WHERE id = ?";
         $stmt = $connect->prepare($select_query);
-        $stmt->bind_param('i', $house_id);
+        $stmt->bind_param('i', $apartment_id);
         $stmt->execute();
         $result = $stmt->get_result();
-        $house = $result->fetch_assoc();
+        $apartment = $result->fetch_assoc();
         $stmt->close();
 
-        if($house) {
+        if($apartment) {
             // Decode the images JSON
-            $images = json_decode($house['images'], true);
+            $images = json_decode($apartment['images'], true);
 
             // Delete each image from the server
             foreach($images as $image) {
-                $file_path = 'uploaded_houses/' . $image;
+                $file_path = 'uploaded_apartments/' . $image;
                 if(file_exists($file_path)) {
                     unlink($file_path);
                 }
             }
         } 
 
-        $delete_query = "DELETE FROM `houses` WHERE `id` = ?";
+        $delete_query = "DELETE FROM `apartments` WHERE `id` = ?";
         $stmt = $connect->prepare($delete_query);
 
-        $stmt->bind_param('i', $house_id);
+        $stmt->bind_param('i', $apartment_id);
         $stmt->execute();
 
         if($stmt->affected_rows > 0) {
@@ -101,7 +102,7 @@
             session_destroy();
             $success_msg = "Listing is deleted";
             $encoded_success_msg = urlencode($success_msg);
-            header("location: ../../admin/houses/create.php?error=$encoded_success_msg");
+            header("location: ../../admin/apartments/create.php?error=$encoded_success_msg");
             exit();
 
         }

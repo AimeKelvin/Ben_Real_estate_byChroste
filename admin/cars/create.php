@@ -199,7 +199,7 @@
                                 }
                             }else {
                                 echo '
-                                    <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">No Cars Added</div>
+                                    <div class="text-[18px] text-center font-black text-slate-900 select-none md-[4px]">No Cars Added</div>
 
                                 ';
                             }
