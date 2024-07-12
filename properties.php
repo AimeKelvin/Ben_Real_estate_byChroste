@@ -26,6 +26,26 @@
       rel="stylesheet"
     />
 
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            screens: {
+                sm: '640px',
+                
+                md: '784px',
+                
+                lg: '1024px',
+                
+                xl: '1280px',
+            },
+            extend: {
+            }
+          }
+        }
+    </script>
+
     <link rel="stylesheet" href="fonts/icomoon/style.css" />
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
 
@@ -38,6 +58,7 @@
     </title>
   </head>
   <body>
+    <?php include './whatsapplink.php'; ?>
     <div class="site-mobile-menu site-navbar-target">
       <div class="site-mobile-menu-header">
         <div class="site-mobile-menu-close">
