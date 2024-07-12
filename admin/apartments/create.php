@@ -76,6 +76,7 @@
     
 </head>
 <body>
+    <?php include '../mobilemenu.php' ?>
     <div class="w-full h-[100vh]">
         <!--Navigation-->
         <div class="w-full h-[80px] border-[1px] border-solid border-gray-300 bg-white p-[10px] fixed top-0 left-0 right-0 flex flex-row justify-between items-center">
@@ -85,7 +86,10 @@
             <div class="flex flex-row spacex-x-[20px] items-center">
                 <div class="flex flex-row space-x-[10px] items-center border-r border-solid pr-[10px] border-slate-400">
                     <div class="bg-blue-500 rounded-full w-[40px] h-[40px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white"><?php echo $defaultProfile; ?></div>
-                    <div class="font-bold text-[16px] select-none text-slate-900"><?php echo $fullname; ?></div>
+                    <div class="font-bold text-[16px] select-none text-slate-900">
+                        <div class="bg-slate-500 rounded-full w-[40px] h-[40px] cursor-pointer flex justify-center items-center block font-bold text-[16px] text-white md:hidden" id="menubtn"><i class="fa-solid fa-bars"></i></div>
+                        <span class="hidden md:block"><?php echo $fullname; ?></span>
+                    </div>
                 </div>
                 <div class="pl-[10px]">
                     <form action="../includes/admin/logout_inc.php" method="POST">
@@ -114,9 +118,9 @@
             <div class="h-full w-full p-[10px] md:p-[40px] pb-[50px] overflow-y-scroll md:w-[85%]">
                 <div class="text-[18px] font-black text-slate-300 select-none mb-[30px]">Admin Creation Page</div>
                 <div class="w-full flex flex-row items-center space-x-[20px] mt-[10px] mb-[20px]">
-                    <div><a href="../cars/create.php" class="bg-blue-300 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-car text-white font-bold"></i><span></span> Add Vehicle</a></div>
-                    <div><a href="../houses/create.php" class="bg-blue-300 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-house text-white font-bold"></i><span></span> Add House</a></div>
-                    <div><a href="#" class="bg-blue-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-building text-white font-bold"></i><span></span> Add Apartment</a></div>
+                    <div><a href="../cars/create.php" class="bg-blue-300 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-car text-white font-bold"></i><span></span> <span class="hidden md:inline-flex">Add Vehicle</span></a></div>
+                    <div><a href="../houses/create.php" class="bg-blue-300 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-house text-white font-bold"></i><span></span> <span class="hidden md:inline-flex">Add House</span></a></div>
+                    <div><a href="#" class="bg-blue-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-building text-white font-bold"></i><span></span> <span class="hidden md:inline-flex">Add Apartment</a></span></div>
                 </div>
                 <!--No of images-->
                 <div id="images-number" class="p-[4px] mb-[3px] flex justify-center items-center w-[40px] bg-blue-500 rounded-full h-[40px] font-bold text-[16px] text-white">0</div>
@@ -231,5 +235,6 @@
     </div>
     
     <script src="../js/main.js"></script>
+    <script src="../js/menu.js"></script>
 </body>
 </html>

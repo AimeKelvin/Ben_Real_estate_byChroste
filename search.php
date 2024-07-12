@@ -125,7 +125,7 @@
       <div class="container">
           <div class="col-lg-6 text-center mx-auto" style="margin-bottom: 20px;">
             <h2 class="font-weight-bold text-primary heading">
-              Featured Houses
+              Search Results
             </h2>
           </div>
         <div class="row">

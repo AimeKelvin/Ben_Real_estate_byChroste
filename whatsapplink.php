@@ -26,6 +26,6 @@
     </script>
 </head>
 <body>
-    <div class="w-[60px] fixed bottom-[30px] right-[30px] z-80 h-[60px] rounded-full bg-[#005555] text-white font-bold text-[16px] flex justify-center items-center"><a href=""><i class="fa-brands fa-whatsapp"></i></a></div>
+    <div class="w-[60px] fixed bottom-[30px] right-[30px] z-80 h-[60px] rounded-full bg-[#005555] text-white font-bold text-[16px] flex justify-center items-center"><a href="https://wa.link/lrbfmk" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></div>
 </body>
 </html>
