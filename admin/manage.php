@@ -110,60 +110,150 @@
             </div>
             <!--Side bar-->
 
+            
+            
+
             <!--Right Section-->
             <div class="h-full w-full p-[10px] md:p-[40px] pb-[50px] overflow-y-scroll md:w-[85%]">
 
                 <div>
-                    <div class="text-[18px] font-black text-slate-300 select-none mt-[20px] mb-[30px]">Manage Your Listings</div>
+                    <div class="text-[18px] font-black text-slate-300 select-none mt-[20px] mb-[30px]">Added Houses</div>
                     <div class="grid grid-cols-1 md:grid-cols-4 space-x-[4px]">
-                        <!--Product One-->
-                        <div class="w-full bg-white/[90%] p-[5px] rounded-[4px] md:w-[100%] flex flex-col">
-                            <div class="w-full h-[200px]">
-                                <img src="../images/hero_bg_1.jpg" class="w-full rounded-[6px] h-full object-cover object-center" alt="Product">
-                            </div>
-                            <div class="p-[10px] rounded-[4px]">
-                                <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">$300</div>
-                                <p class="font-md text-[14px] text-slate-500 select-none text-start">Upload an Image file of your product here...</p>
-                                <a href="" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <!--Product One-->
-                        <!--Product Two-->
-                        <div class="w-full bg-white/[90%] p-[5px] rounded-[4px] md:w-[100%] flex flex-col">
-                            <div class="w-full h-[200px]">
-                                <img src="../images/hero_bg_2.jpg" class="w-full rounded-[6px] h-full object-cover object-center" alt="Product">
-                            </div>
-                            <div class="p-[10px] rounded-[4px]">
-                                <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">$300</div>
-                                <p class="font-md text-[14px] text-slate-500 select-none text-start">Upload an Image file of your product here...</p>
-                                <a href="" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <!--Product Two-->
-                        <!--Product Three-->
-                        <div class="w-full bg-white/[90%] p-[5px] rounded-[4px] md:w-[100%] flex flex-col">
-                            <div class="w-full h-[200px]">
-                                <img src="../images/hero_bg_3.jpg" class="w-full rounded-[6px] h-full object-cover object-center" alt="Product">
-                            </div>
-                            <div class="p-[10px] rounded-[4px]">
-                                <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">$300</div>
-                                <p class="font-md text-[14px] text-slate-500 select-none text-start">Upload an Image file of your product here...</p>
-                                <a href="" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <!--Product Three-->
-                        <!--Product Four-->
-                        <div class="w-full bg-white/[90%] p-[5px] rounded-[4px] md:w-[100%] flex flex-col">
-                            <div class="w-full h-[200px]">
-                                <img src="../images/hero_bg_1.jpg" class="w-full rounded-[6px] h-full object-cover object-center" alt="Product">
-                            </div>
-                            <div class="p-[10px] rounded-[4px]">
-                                <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">$300</div>
-                                <p class="font-md text-[14px] text-slate-500 select-none text-start">Upload an Image file of your product here...</p>
-                                <a href="" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <!--Product Four-->
+                        <?php
+                            $fetch_houses = "SELECT * FROM `houses`";
+
+                            $stmt = $connect->prepare($fetch_houses);
+    
+                            $stmt->execute();
+    
+                            $result = $stmt->get_result();
+
+                            if(mysqli_num_rows($result) > 0) {
+                                while($fetch = $result->fetch_assoc()) {
+                                    $images = json_decode($fetch['images']);
+
+                                    if (is_array($images) && count($images) > 0) {
+                                        $thumbnail = $images[0];
+                                    }
+                                    echo '
+                                        <div class="w-full bg-white/[90%] p-[5px] rounded-[4px] md:w-[100%] flex flex-col">
+                                            <div class="w-full h-[200px]">
+                                                <img src="../includes/admin/uploaded_houses/' .$thumbnail. '" class="w-full rounded-[6px] h-full object-cover object-center" alt="Product">
+                                            </div>
+                                            <div class="p-[10px] rounded-[4px]">
+                                                <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">' .$fetch['house_price']. '</div>
+                                                <p class="font-md text-[14px] text-slate-500 select-none text-start">Upload an Image file of your product here...</p>
+                                                <a href="../admin/houses/single_listing_house.php?id=' .$fetch['id']. '" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
+                                            </div>
+                                        </div>
+                                    
+                                    
+                                    ';
+                                }
+                            }else {
+                                echo '
+                                    <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">No Cars Added</div>
+
+                                ';
+                            }
+                        
+                        ?>
+
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="text-[18px] font-black text-slate-300 select-none mt-[20px] mb-[30px]">Added Apartments</div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 space-x-[4px]">
+                        <?php
+                            $fetch_apartments = "SELECT * FROM `apartments`";
+
+                            $stmt = $connect->prepare($fetch_apartments);
+    
+                            $stmt->execute();
+    
+                            $result = $stmt->get_result();
+
+                            if(mysqli_num_rows($result) > 0) {
+
+                                while($fetch = $result->fetch_assoc()) {
+                                    $images = json_decode($fetch['images']);
+
+                                    if (is_array($images) && count($images) > 0) {
+                                        $thumbnail = $images[0];
+                                    }
+                                    echo '
+                                        <div class="w-full bg-white/[90%] p-[5px] rounded-[4px] md:w-[100%] flex flex-col">
+                                            <div class="w-full h-[200px]">
+                                                <img src="../includes/admin/uploaded_apartments/' .$thumbnail. '" class="w-full rounded-[6px] h-full object-cover object-center" alt="Product">
+                                            </div>
+                                            <div class="p-[10px] rounded-[4px]">
+                                                <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">' .$fetch['apartment_price']. '</div>
+                                                <p class="font-md text-[14px] text-slate-500 select-none text-start">Upload an Image file of your product here...</p>
+                                                <a href="../admin/apartments/single_listing_apartment.php?id=' .$fetch['id']. '" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
+                                            </div>
+                                        </div>
+                                    
+                                    
+                                    ';
+                                }
+                            }else {
+                                echo '
+                                    <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">No Cars Added</div>
+
+                                ';
+                            }
+                        
+                        ?>
+
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="text-[18px] font-black text-slate-300 select-none mt-[20px] mb-[30px]">Added Vehicles</div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 space-x-[4px]">
+                        <?php
+                            $fetch_cars = "SELECT * FROM `cars`";
+
+                            $stmt = $connect->prepare($fetch_cars);
+    
+                            $stmt->execute();
+    
+                            $result = $stmt->get_result();
+
+                            if(mysqli_num_rows($result) > 0) {
+                                while($fetch = $result->fetch_assoc()) {
+                                    $images = json_decode($fetch['images']);
+
+                                    if (is_array($images) && count($images) > 0) {
+                                        $thumbnail = $images[0];
+                                    }
+                                    echo '
+                                        <div class="w-full bg-white/[90%] p-[5px] rounded-[4px] md:w-[100%] flex flex-col">
+                                            <div class="w-full h-[200px]">
+                                                <img src="../includes/admin/uploaded_cars/' .$thumbnail. '" class="w-full rounded-[6px] h-full object-cover object-center" alt="Product">
+                                            </div>
+                                            <div class="p-[10px] rounded-[4px]">
+                                                <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">' .$fetch['car_price']. '</div>
+                                                <p class="font-md text-[14px] text-slate-500 select-none text-start">Upload an Image file of your product here...</p>
+                                                <a href="../admin/cars/single_listing_car.php?id=' .$fetch['id']. '" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
+                                            </div>
+                                        </div>
+                                    
+                                    
+                                    ';
+                                }
+                            }else {
+                                echo '
+                                    <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">No Cars Added</div>
+
+                                ';
+                            }
+                        
+                        ?>
+
                     </div>
                 </div>
 
