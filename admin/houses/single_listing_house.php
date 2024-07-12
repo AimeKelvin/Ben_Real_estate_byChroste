@@ -168,14 +168,29 @@
                     <p class="text-slate-400 font-bold text-[18px]">Status: <span class="text-blue-400"><?php echo $output_fetch['status'] ?></span></p>
                 </div>
 
-                <div class="mt-[20px]">
-                    <form action="../../includes/admin/update_house_inc.php" method="POST">
-                        <div><input type="text" class="hidden" name="id" value="<?php echo $output_fetch['id'] ?>"></div>
-                        <button type="submit" class="bg-red-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold" name="delete_listing_btn">Delete</button>
-                    </form>
+                <div class="mt-[30px]">
+                    <div class="flex space-x-[20px] items-center">
+                        <div>
+                            <form action="../../includes/admin/update_house_inc.php" method="POST">
+                                <input type="hidden" name="id" value="<?php echo $output_fetch['id']; ?>">
+                                <button type="submit" class="bg-red-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold" name="delete_listing_btn">Delete</button>
+                            </form> 
+                        </div>
+                        <!-- add to sales -->
+                        <div>
+                            <form action="../../includes/admin/mark_sold_inc.php" method="POST">
+                                <input type="hidden" name="id" value="<?php echo $output_fetch['id']; ?>">
+                                <button type="submit" class="bg-slate-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold" name="mark_sold_btn">Mark Sold</button>
+                            </form> 
+                        </div>
+                        <!-- add to sales -->
+                    </div>
                 </div>
 
-                <div class="flex flex-col space-x-[0px] mt-[50px] w-full space-y-[10px] justify-between items-start md:flex-row md:space-x-[20px] md:space-y-[0px]">
+                <!--No of images-->
+                <div id="images-number" class="p-[4px] mt-[20px] mb-[3px] flex justify-center items-center w-[40px] bg-blue-500 rounded-full h-[40px] font-bold text-[16px] text-white">0</div>
+                <!--No of images-->
+                <div class="flex flex-col space-x-[0px] mt-[20px] w-full space-y-[10px] justify-between items-start md:flex-row md:space-x-[20px] md:space-y-[0px]">
                     <div id="images-cont" class="w-full md:w-[50%] border-[1px] border-solid border-gray-300 rounded-[15px] h-[540px] flex flex-col justify-center items-center p-[20px]">
                         <div class="flex flex-col justify-center">
                             <div class="text-[18px] font-bold text-slate-300 text-center select-none mb-[30px]">File Upload</div>

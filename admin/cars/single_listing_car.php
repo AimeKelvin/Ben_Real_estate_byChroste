@@ -156,15 +156,81 @@
                         }
                         
                     echo '</div>';
-
-                    echo $output_fetch['car_price'] . '<br>';
-                    echo $output_fetch['description'] . '<br>';
-                    echo $output_fetch['kilometres'] . '<br>';
-                      
-                
-                
                 
                 ?>
+                <div class="mt-[30px] w-full border-[2px] border-gray-300 border-solid p-[12px] rounded-[12px]">
+                    <p class="text-slate-400 font-bold text-[18px]">Car Name: <span class="text-blue-400"><?php echo $output_fetch['car_name'] ?></span></p>
+                    <p class="text-slate-400 font-bold text-[18px]">Price: <span class="text-blue-400"><?php echo $output_fetch['car_price'] ?></span></p>
+                    <p class="text-slate-400 font-bold text-[18px]">Kilometres: <span class="text-blue-400"><?php echo $output_fetch['kilometres'] ?></span></p>
+                    <p class="text-slate-400 font-bold text-[18px]">Description: <span class="text-blue-400"><?php echo $output_fetch['description'] ?></span></p>
+                    <p class="text-slate-400 font-bold text-[18px]">Status: <span class="text-blue-400"><?php echo $output_fetch['status'] ?></span></p>
+                </div>
+
+                <div class="mt-[30px]">
+                    <div class="flex space-x-[20px] items-center">
+                        <div>
+                            <form action="../../includes/admin/update_car_inc.php" method="POST">
+                                <input type="hidden" name="id" value="<?php echo $output_fetch['id']; ?>">
+                                <button type="submit" class="bg-red-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold" name="delete_listing_btn">Delete</button>
+                            </form> 
+                        </div>
+                        <!-- add to sales -->
+                        <div>
+                            <form action="../../includes/admin/mark_sold_inc.php" method="POST">
+                                <input type="hidden" name="id" value="<?php echo $output_fetch['id']; ?>">
+                                <button type="submit" class="bg-slate-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold" name="mark_sold_btn">Mark Sold</button>
+                            </form> 
+                        </div>
+                        <!-- add to sales -->
+                    </div>
+                </div>
+                
+                <!--No of images-->
+                <div id="images-number" class="p-[4px] mt-[20px] mb-[3px] flex justify-center items-center w-[40px] bg-blue-500 rounded-full h-[40px] font-bold text-[16px] text-white">0</div>
+                <!--No of images-->
+                <div class="flex flex-col mt-[20px] space-x-[0px] w-full space-y-[10px] justify-between items-start md:flex-row md:space-x-[20px] md:space-y-[0px]">
+                    <div id="images-cont" class="w-full md:w-[50%] border-[1px] border-solid border-gray-300 rounded-[15px] h-[430px] flex flex-col justify-center items-center p-[20px]">
+                        <div class="flex flex-col justify-center">
+                            <div class="text-[18px] font-bold text-slate-300 text-center select-none mb-[30px]">File Upload</div>
+                            <div class="text-center"><label for="file"><i class="fa-regular fa-file text-[30px] text-slate-400 fony-bold"></i></label></div>
+                            <p class="font-md text-[14px] text-slate-300 select-none text-center">Upload an Image file of your product here</p>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-[50%]">
+                        <div class="text-[16px] font-bold text-slate-300 text-center select-none mb-[10px]">Upload Product Info</div>
+                        <form action="../../includes/admin/update_car_inc.php" method="POST" enctype="multipart/form-data">
+                            <div class="flex flex-col space-y-[12px]">
+                                <div><input type="file" class="hidden" id="file" onchange="preview()" name="car_image[]" accept=".jpg, .jpeg, .png" multiple></div>
+                                <div><input type="text" class="hidden" name="id" value="<?php echo $output_fetch['id'] ?>"></div>
+                                <div>
+                                    <input type="text" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0" placeholder="Car Name" value="<?php echo $output_fetch['car_name'] ?>" name="car_name">
+                                </div>
+                                <div>
+                                    <input type="text" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0" placeholder="Price" value="<?php echo $output_fetch['car_price'] ?>" name="price">
+                                </div>
+                                <div>
+                                    <input type="text" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0" placeholder="Kilometres" value="<?php echo $output_fetch['kilometres'] ?>" name="kilometres">
+                                </div>
+                                <div>
+                                    <textarea name="description" placeholder="Product Description" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full h-[150px] pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0"><?php echo $output_fetch['description'] ?></textarea>
+                                </div>
+                                <div class="flex flex-row no-wrap space-x-[40px] items-center">
+                                    <div class="flex flex-row items-center space-x-[6px]">
+                                        <input type="radio" id="rent" value="rent" name="status">
+                                        <label for="rent" class="text-slate-500 text-md">For Rent</label>
+                                    </div>
+                                    <div class="flex flex-row items-center space-x-[6px]">
+                                        <input type="radio" id="sale" value="sale" name="status">
+                                        <label for="sale" class="text-slate-500 text-md">For Sale</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div><button type="submit" name="update_car_btn" class="bg-blue-500 w-full pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold">Add Product</button></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 
                 
             </div>
@@ -173,6 +239,6 @@
         </div>
         <!--Main content-->
     </div>
-    
+    <script src="../js/main.js"></script>
 </body>
 </html>
