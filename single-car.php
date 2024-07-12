@@ -49,6 +49,25 @@
       href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            screens: {
+                sm: '640px',
+                
+                md: '784px',
+                
+                lg: '1024px',
+                
+                xl: '1280px',
+            },
+            extend: {
+            }
+          }
+        }
+    </script>
 
     <link rel="stylesheet" href="fonts/icomoon/style.css" />
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
@@ -57,9 +76,10 @@
     <link rel="stylesheet" href="css/aos.css" />
     <link rel="stylesheet" href="css/style.css" />
 
-    <title>Inzu Kibagabaga</title>
+    <title><?php echo $car_title; ?></title>
   </head>
   <body>
+    <?php include './whatsapplink.php'; ?>
     <div class="site-mobile-menu site-navbar-target">
       <div class="site-mobile-menu-header">
         <div class="site-mobile-menu-close">
@@ -114,15 +134,15 @@
               data-aos-delay="200"
             >
               <ol class="breadcrumb text-center justify-content-center">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                 <li class="breadcrumb-item">
-                  <a href="properties.html">Properties</a>
+                  <a href="properties.php">Properties</a>
                 </li>
                 <li
                   class="breadcrumb-item active text-white-50"
                   aria-current="page"
                 >
-                  5232 California AVE. 21BC
+                  <?php echo $car_title; ?>
                 </li>
               </ol>
             </nav>
@@ -137,58 +157,72 @@
           <div class="col-lg-7">
             <div class="img-property-slide-wrap">
               <div class="img-property-slide">
-                <img src="images/img_1.jpg" alt="Image" class="img-fluid" />
-                <img src="images/img_2.jpg" alt="Image" class="img-fluid" />
-                <img src="images/img_3.jpg" alt="Image" class="img-fluid" />
+                <?php
+                    $car_id  = $_GET['car'];
+
+                    //fetch the details for the car
+                    $sql = "SELECT * FROM `cars` WHERE `id` = ?";
+                    $stmt = $connect->prepare($sql);
+
+                    $stmt->bind_param('i', $car_id);
+                    $stmt->execute();
+
+                    $output = $stmt->get_result();
+                    $output_fetch = $output->fetch_assoc();
+                    
+                    
+                    foreach(json_decode($output_fetch['images']) as $image) {
+                        echo '
+                            <img src="./includes/admin/uploaded_cars/' .$image. '" alt="Image" class="img-fluid" />
+
+                        ';
+                    }
+                        
+                ?>
               </div>
             </div>
           </div>
           <div class="col-lg-4">
-            <h2 class="heading text-primary">5232 California Ave. 21BC</h2>
+            <h2 class="heading text-primary"><?php echo $car_title; ?></h2>
             <p class="meta">California, United States</p>
             <p class="text-black-50">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione
-              laborum quo quos omnis sed magnam id, ducimus saepe, debitis error
-              earum, iste dicta odio est sint dolorem magni animi tenetur.
+              <?php echo $output_fetch['description']; ?>
             </p>
-            <p class="text-black-50">
-              Perferendis eligendi reprehenderit, assumenda molestias nisi eius
-              iste reiciendis porro tenetur in, repudiandae amet libero.
-              Doloremque, reprehenderit cupiditate error laudantium qui, esse
-              quam debitis, eum cumque perferendis, illum harum expedita.
-            </p>
-
-            <div class="d-block agent-box p-5">
-              <div class="img mb-4">
-                <img
-                  src="images/person_2-min.jpg"
-                  alt="Image"
-                  class="img-fluid"
-                />
-              </div>
-              <div class="text">
-                <h3 class="mb-0">Alicia Huston</h3>
-                <div class="meta mb-3">Real Estate</div>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Ratione laborum quo quos omnis sed magnam id ducimus saepe
-                </p>
-                <ul class="list-unstyled social dark-hover d-flex">
-                  <li class="me-1">
-                    <a href="#"><span class="icon-instagram"></span></a>
-                  </li>
-                  <li class="me-1">
-                    <a href="#"><span class="icon-twitter"></span></a>
-                  </li>
-                  <li class="me-1">
-                    <a href="#"><span class="icon-facebook"></span></a>
-                  </li>
-                  <li class="me-1">
-                    <a href="#"><span class="icon-linkedin"></span></a>
-                  </li>
-                </ul>
-              </div>
+            <div style="margin-bottom: 30px;">
+                <div class="specs d-flex mb-4">
+                  <span class="d-block d-flex align-items-center me-3">
+                    <span class="icon-bed me-2"></span>
+                    <span class="caption"><?php echo $output_fetch['kilometres']; ?></span>
+                  </span>
+                  <span class="d-block d-flex align-items-center" style="margin-right: 20px;">
+                    <span class="icon-bath me-2"></span>
+                    <span class="caption"><?php echo $output_fetch['car_price']; ?></span>
+                  </span>
+                  <span class="d-block d-flex align-items-center">
+                    <span class="icon-bath me-2"></span>
+                    <span class="caption" style="text-transform: capitalize;"><?php echo $output_fetch['status']; ?></span>
+                  </span>
+                </div>
             </div>
+
+            <div>
+              <h2 class="heading text-primary">Make a Deal</h2>
+              <form action="" method="POST">
+                <div>
+                  <input type="text" style="display: none;" value="">
+                </div>
+                <div style="margin-bottom: 10px;">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name"/>
+                </div>
+                <div style="margin-bottom: 10px;">
+                  <input type="text" name="name" class="form-control" placeholder="Your Number"/>
+                </div>
+                <div>
+                  <input type="submit" name="send_btn" value="Send Message"class="btn btn-primary"/>
+                </div>
+              </form>
+            </div>
+            
           </div>
         </div>
       </div>
