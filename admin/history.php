@@ -76,6 +76,7 @@
     
 </head>
 <body>
+    <?php include './mobilemenu.php'; ?>
     <div class="w-full h-[100vh]">
         <!--Navigation-->
         <div class="w-full h-[80px] border-[1px] border-solid border-gray-300 bg-white p-[10px] fixed top-0 left-0 right-0 flex flex-row justify-between items-center">
@@ -85,7 +86,10 @@
             <div class="flex flex-row spacex-x-[20px] items-center">
                 <div class="flex flex-row space-x-[10px] items-center border-r border-solid pr-[10px] border-slate-400">
                     <div class="bg-blue-500 rounded-full w-[40px] h-[40px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white"><?php echo $defaultProfile; ?></div>
-                    <div class="font-bold text-[16px] select-none text-slate-900"><?php echo $fullname; ?></div>
+                    <div class="font-bold text-[16px] select-none text-slate-900">
+                        <div class="bg-slate-500 rounded-full w-[40px] h-[40px] cursor-pointer flex justify-center items-center block font-bold text-[16px] text-white md:hidden" id="menubtn"><i class="fa-solid fa-bars"></i></div>
+                        <span class="hidden md:block"><?php echo $fullname; ?></span>
+                    </div>
                 </div>
                 <div class="pl-[10px]">
                     <form action="../includes/admin/logout_inc.php" method="POST">
@@ -171,6 +175,8 @@
         </div>
         <!--Main content-->
     </div>
+
+    <script src="./js/menu.js"></script>
     
 </body>
 </html>

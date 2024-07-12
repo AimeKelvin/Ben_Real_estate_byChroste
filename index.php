@@ -113,8 +113,8 @@
         <div class="row justify-content-center align-items-center">
           <div class="col-lg-9 text-center">
             <h1 class="heading" data-aos="fade-up">
-              Find your dream Home <br>
-              dial +250 072 822 222
+              Find your dream Properties <br>
+              dial +250 788 558 218
             </h1>
             
             <form
