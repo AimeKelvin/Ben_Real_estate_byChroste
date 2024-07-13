@@ -261,10 +261,10 @@
               <span class="flaticon-house"></span>
               <h3 class="mb-3">Our Properties</h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptates, accusamus.
+              We sell brand new houses, providing personalized and seamless
+               service through a dedicated agent. Find your perfect new home with us!
               </p>
-              <p><a href="#" class="learn-more">Learn More</a></p>
+             
             </div>
           </div>
           <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
@@ -272,10 +272,11 @@
               <span class="flaticon-building"></span>
               <h3 class="mb-3">Property for Sale</h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptates, accusamus.
+              We have prime real estate properties for sale,
+               featuring modern designs and competitive prices.
+                Discover your perfect home or investment today!
               </p>
-              <p><a href="#" class="learn-more">Learn More</a></p>
+          
             </div>
           </div>
           <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
@@ -283,10 +284,10 @@
               <span class="flaticon-house-3"></span>
               <h3 class="mb-3">Real Estate Agent</h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptates, accusamus.
+              All our real estate transactions are managed by a single dedicated agent,
+               ensuring personalized and seamless service.
               </p>
-              <p><a href="#" class="learn-more">Learn More</a></p>
+              <p><a href="#about" class="learn-more">Learn More</a></p>
             </div>
           </div>
           <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="600">
@@ -294,10 +295,10 @@
               <span class="flaticon-house-1"></span>
               <h3 class="mb-3">House for Sale</h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptates, accusamus.
+                We specialize in selling homes, offering personalized and
+                 seamless service from a dedicated agent. Find your dream home with us!
               </p>
-              <p><a href="#" class="learn-more">Learn More</a></p>
+              
             </div>
           </div>
         </div>
@@ -312,11 +313,6 @@
             <h2 class="font-weight-bold heading text-primary mb-4">
              The Agent
             </h2>
-            <p class="text-black-50">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-              enim pariatur similique debitis vel nisi qui reprehenderit totam?
-              Quod maiores.
-            </p>
           </div>
         </div>
         <div class="row">
@@ -332,10 +328,14 @@
               <div class="person-contents" style="width: 600px;">
                 <h2 class="mb-0"><a href="#">Ben Shakondo</a></h2>
                 <span class="meta d-block mb-3">Real Estate Agent</span>
-                <p style="text-align: center;">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Facere officiis inventore cumque tenetur laboriosam, minus
-                  culpa doloremque odio, neque molestias?
+                <p style="text-align: center;
+                padding:50px">
+                Hi, I'm Ben Shakondo, a real estate agent in Rwanda.
+                 I specialize in helping clients find homes, investment
+                  properties, and commercial spaces. With a deep
+                   understanding of the local market and strong 
+                   negotiation skills, I aim to provide exceptional 
+                   service and trusted advice for all your real estate needs.
                 </p>
 
                 <ul class="social list-unstyled list-inline dark-hover">
@@ -367,69 +367,32 @@
           <div class="col-lg-4">
             <div class="widget">
               <h3>Contact</h3>
-              <address>43 Raymouth Rd. Baltemoer, London 3910</address>
               <ul class="list-unstyled links">
-                <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
-                <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
+                <li><a href="tel://11234567890">+250 788 558 218</a></li>
                 <li>
-                  <a href="mailto:info@mydomain.com">info@mydomain.com</a>
+                  <a href="mailto:info@mydomain.com">benrealestate24@gmail.com</a>
                 </li>
               </ul>
             </div>
             <!-- /.widget -->
           </div>
           <!-- /.col-lg-4 -->
-          <div class="col-lg-4">
-            <div class="widget">
-              <h3>Sources</h3>
-              <ul class="list-unstyled float-start links">
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Vision</a></li>
-                <li><a href="#">Mission</a></li>
-                <li><a href="#">Terms</a></li>
-                <li><a href="#">Privacy</a></li>
-              </ul>
-              <ul class="list-unstyled float-start links">
-                <li><a href="#">Partners</a></li>
-                <li><a href="#">Business</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Creative</a></li>
-              </ul>
-            </div>
-            <!-- /.widget -->
-          </div>
           <!-- /.col-lg-4 -->
           <div class="col-lg-4">
             <div class="widget">
               <h3>Links</h3>
-              <ul class="list-unstyled links">
-                <li><a href="#">Our Vision</a></li>
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Contact us</a></li>
-              </ul>
-
               <ul class="list-unstyled social">
                 <li>
                   <a href="#"><span class="icon-instagram"></span></a>
                 </li>
-                <li>
-                  <a href="#"><span class="icon-twitter"></span></a>
-                </li>
+             
                 <li>
                   <a href="#"><span class="icon-facebook"></span></a>
                 </li>
                 <li>
-                  <a href="#"><span class="icon-linkedin"></span></a>
+                  <a href="#"><span class="icon-youtube"></span></a>
                 </li>
-                <li>
-                  <a href="#"><span class="icon-pinterest"></span></a>
-                </li>
-                <li>
-                  <a href="#"><span class="icon-dribbble"></span></a>
-                </li>
+                
               </ul>
             </div>
             <!-- /.widget -->
