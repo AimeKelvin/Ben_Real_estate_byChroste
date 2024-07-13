@@ -319,7 +319,7 @@
           <div style="display: flex; justify-content: center;">
             <div class="h-100 person">
               <img
-                src="images/person_2-min.jpg"
+                src="https://i.pinimg.com/736x/1b/dd/ac/1bddac34546993d914bf382176ea60fd.jpg"
                 alt="Image"
                 class="img-fluid"
               />
