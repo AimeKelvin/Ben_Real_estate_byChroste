@@ -279,7 +279,7 @@
                         <!--detail one-->
                         <div class="w-full border-[2px] border-solid border-gray-300 flex flex-col items-center p-[15px] rounded-[12px]">
                             <?php
-                                $query = "SELECT COUNT(*) AS total FROM `history`";
+                                $query = "SELECT COUNT(*) AS total FROM `deals`";
                                 $stmt = $connect->prepare($query);
                                 
                                 $stmt->execute();
@@ -296,11 +296,11 @@
                             ?>
                             <div class="flex flex-row items-center mb-[20px]">
                                 <div class="bg-red-500 rounded-full w-[40px] h-[40px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white">N</div>
-                                <div class="text-[16px] font-bold text-slate-500 select-none pl-[10px]">History Records</div>
+                                <div class="text-[16px] font-bold text-slate-500 select-none pl-[10px]">Deal Records</div>
                             </div>
                             <div class="flex justify-between items-center space-x-[20px]">
                                 <div class="text-[32px] font-black text-slate-900 select-none border-r border-solid border-gray-300 pr-[10px]"><?php echo $total_rows; ?></div>
-                                <div class="text-[16px] font-bold text-red-500 select-none pl-[10px]">Total Records</div>
+                                <div class="text-[16px] font-bold text-red-500 select-none pl-[10px]">Total Deals</div>
                             </div>
                         </div>
                         <!--detail one-->
@@ -396,9 +396,22 @@
     
                             $result = $stmt->get_result();
 
+                            function trimText($text, $maxLength = 30) {
+                                if (strlen($text) > $maxLength) {
+                                    return substr($text, 0, $maxLength) . '...';
+                                } else {
+                                    return $text;
+                                }
+                            }
+
                             if(mysqli_num_rows($result) > 0) {
                                 while($fetch = $result->fetch_assoc()) {
                                     $images = json_decode($fetch['images']);
+
+                                    
+                                    $text = $fetch['house_des'];
+                                    $trimmedText = trimText($text);
+
 
                                     if (is_array($images) && count($images) > 0) {
                                         $thumbnail = $images[0];
@@ -410,7 +423,7 @@
                                             </div>
                                             <div class="p-[10px] rounded-[4px]">
                                                 <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">' .$fetch['house_price']. '</div>
-                                                <p class="font-md text-[14px] text-slate-500 select-none text-start">Upload an Image file of your product here...</p>
+                                                <p class="font-md text-[14px] text-slate-500 select-none text-start">' .$trimmedText. '</p>
                                                 <a href="./houses/single_listing_house.php?id=' .$fetch['id']. '" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
                                             </div>
                                         </div>

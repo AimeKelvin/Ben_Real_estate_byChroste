@@ -152,6 +152,8 @@
 
                         $result = $stmt->get_result();
 
+                        
+
                         if(mysqli_num_rows($result) > 0) {
                             while($fetch = $result->fetch_assoc()) {
 
@@ -198,9 +200,20 @@
     
                             $result = $stmt->get_result();
 
+                            function trimTextHouse($text, $maxLength = 30) {
+                                if (strlen($text) > $maxLength) {
+                                    return substr($text, 0, $maxLength) . '...';
+                                } else {
+                                    return $text;
+                                }
+                            }
+
                             if(mysqli_num_rows($result) > 0) {
                                 while($fetch = $result->fetch_assoc()) {
                                     $images = json_decode($fetch['images']);
+
+                                    $text = $fetch['house_des'];
+                                    $trimmedText = trimTextHouse($text);
 
                                     if (is_array($images) && count($images) > 0) {
                                         $thumbnail = $images[0];
@@ -212,7 +225,7 @@
                                             </div>
                                             <div class="p-[10px] rounded-[4px]">
                                                 <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">' .$fetch['house_price']. '</div>
-                                                <p class="font-md text-[14px] text-slate-500 select-none text-start">Upload an Image file of your product here...</p>
+                                                <p class="font-md text-[14px] text-slate-500 select-none text-start">' .$trimmedText. '</p>
                                                 <a href="../admin/houses/single_listing_house.php?id=' .$fetch['id']. '" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
                                             </div>
                                         </div>
@@ -245,10 +258,21 @@
     
                             $result = $stmt->get_result();
 
+                            function trimTextApartments($text, $maxLength = 30) {
+                                if (strlen($text) > $maxLength) {
+                                    return substr($text, 0, $maxLength) . '...';
+                                } else {
+                                    return $text;
+                                }
+                            }
+
                             if(mysqli_num_rows($result) > 0) {
 
                                 while($fetch = $result->fetch_assoc()) {
                                     $images = json_decode($fetch['images']);
+
+                                    $text = $fetch['apartment_des'];
+                                    $trimmedText = trimTextApartments($text);
 
                                     if (is_array($images) && count($images) > 0) {
                                         $thumbnail = $images[0];
@@ -260,7 +284,7 @@
                                             </div>
                                             <div class="p-[10px] rounded-[4px]">
                                                 <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">' .$fetch['apartment_price']. '</div>
-                                                <p class="font-md text-[14px] text-slate-500 select-none text-start">Upload an Image file of your product here...</p>
+                                                <p class="font-md text-[14px] text-slate-500 select-none text-start">' .$trimmedText. '</p>
                                                 <a href="../admin/apartments/single_listing_apartment.php?id=' .$fetch['id']. '" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
                                             </div>
                                         </div>
@@ -293,9 +317,20 @@
     
                             $result = $stmt->get_result();
 
+                            function trimTextCar($text, $maxLength = 30) {
+                                if (strlen($text) > $maxLength) {
+                                    return substr($text, 0, $maxLength) . '...';
+                                } else {
+                                    return $text;
+                                }
+                            }
+
                             if(mysqli_num_rows($result) > 0) {
                                 while($fetch = $result->fetch_assoc()) {
                                     $images = json_decode($fetch['images']);
+
+                                    $text = $fetch['description'];
+                                    $trimmedText = trimTextCar($text);
 
                                     if (is_array($images) && count($images) > 0) {
                                         $thumbnail = $images[0];
@@ -307,7 +342,7 @@
                                             </div>
                                             <div class="p-[10px] rounded-[4px]">
                                                 <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">' .$fetch['car_price']. '</div>
-                                                <p class="font-md text-[14px] text-slate-500 select-none text-start">Upload an Image file of your product here...</p>
+                                                <p class="font-md text-[14px] text-slate-500 select-none text-start">$trimmedText</p>
                                                 <a href="../admin/cars/single_listing_car.php?id=' .$fetch['id']. '" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
                                             </div>
                                         </div>

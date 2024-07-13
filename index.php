@@ -68,7 +68,7 @@
       <div class="container">
         <div class="menu-bg-wrap">
           <div class="site-navigation">
-            <a href="index.html" class="logo m-0 float-start">Ben Real Estate.</a>
+            <a href="index.php" class="logo m-0 float-start">Ben Real Estate.</a>
 
             <ul
               class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
@@ -179,7 +179,7 @@
                           }
                           echo '
                                 <div class="property-item">
-                                  <a href="property-single.html" class="img">
+                                  <a href="" class="img">
                                     <img src="./includes/admin/uploaded_houses/' .$thumbnail. '" alt="Image" style="width: 100%; height: 370px; object-fit: cover; object-position: 50% 50%;" class="img-fluid" />
                                   </a>
 
