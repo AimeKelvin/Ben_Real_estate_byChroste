@@ -240,6 +240,7 @@
             <div class="widget">
               <h3>Contact</h3>
             
+              <address>Kacyiru, KG 572 Street</address>
               <ul class="list-unstyled links">
                 <li><a href="tel://250788558218">+250 788 558 218</a></li>
                 <li>
@@ -273,6 +274,19 @@
             <!-- /.widget -->
           </div>
           <!-- /.col-lg-4 -->
+
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Navigation</h3>
+              <ul class="list-unstyled float-start links">
+                <li><a href="./index.php">Home</a></li>
+                <li><a href="./services.php">Services</a></li>
+                <li><a href="./properties.php">Properties</a></li>
+                <li><a href="./">Contact us</a></li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
         </div>
         <!-- /.row -->
 

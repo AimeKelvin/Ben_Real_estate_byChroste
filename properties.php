@@ -578,13 +578,14 @@
       </div>
     </div>
 
-    <div class="site-footer" style="margin-bottom: -125px;">
+    <div class="site-footer">
       <div class="container">
         <div class="row">
           <div class="col-lg-4">
             <div class="widget">
               <h3>Contact</h3>
             
+              <address>Kacyiru, KG 572 Street</address>
               <ul class="list-unstyled links">
                 <li><a href="tel://250788558218">+250 788 558 218</a></li>
                 <li>
@@ -594,17 +595,13 @@
             </div>
             <!-- /.widget -->
           </div>
-       
-          </div>
+          <!-- /.col-lg-4 -->
+         
           <!-- /.col-lg-4 -->
           <div class="col-lg-4">
             <div class="widget">
               <h3>Links</h3>
-              <ul class="list-unstyled links">
-                
-                <li><a href="#about">About us</a></li>
               
-              </ul>
 
               <ul class="list-unstyled social">
                 <li>
@@ -616,12 +613,25 @@
                 <li>
                   <a href="#"><span class="icon-facebook"></span></a>
                 </li>
-                
+               
               </ul>
             </div>
             <!-- /.widget -->
           </div>
           <!-- /.col-lg-4 -->
+
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Navigation</h3>
+              <ul class="list-unstyled float-start links">
+                <li><a href="./index.php">Home</a></li>
+                <li><a href="./services.php">Services</a></li>
+                <li><a href="#">Properties</a></li>
+                <li><a href="./contact.php">Contact us</a></li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
         </div>
         <!-- /.row -->
 
