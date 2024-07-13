@@ -42,11 +42,36 @@
     <link rel="stylesheet" href="css/tiny-slider.css" />
     <link rel="stylesheet" href="css/aos.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
     <title>Contact</title>
   </head>
   <body>
     <?php include './whatsapplink.php'; ?>
+    <?php
+        //Success
+        if (isset($_GET['success'])) {
+            // Decode the message
+            $msg = urldecode($_GET['success']);
+
+            echo '<span class="success-toast" style="position: absolute; bottom: 20px; left: 20px; padding: 20px; border-radius: 10px; color: #fff; font-weight: bold; z-index: 20; background-color: rgb(76, 211, 227); margin-left: 10px; margin-top: 10px;">' . htmlspecialchars($msg) . '</span>';
+
+            unset($_GET['success']);
+    
+        }
+
+
+        if (isset($_GET['error'])) {
+            // Decode the message
+            $msg = urldecode($_GET['error']);
+
+            echo '<span class="error-cont" style="position: absolute; bottom: 20px; left: 20px; padding: 20px; border-radius: 10px; color: #fff; font-weight: bold; z-index: 20; background-color: rgb(255, 76, 76); margin-left: 10px; margin-top: 10px;">' . htmlspecialchars($msg) . '</span>';
+
+            unset($_GET['error']);
+    
+        }
+    ?>
     <div class="site-mobile-menu site-navbar-target">
       <div class="site-mobile-menu-header">
         <div class="site-mobile-menu-close">
@@ -160,7 +185,7 @@
                   <input type="text" name="name" class="form-control" placeholder="Your Name"/>
                 </div>
                 <div class="col-6 mb-3">
-                  <input type="email" name="email" class="form-control" placeholder="Your Email"
+                  <input type="text" name="email" class="form-control" placeholder="Your Email"
                   />
                 </div>
                 <div class="col-12 mb-3">
@@ -282,6 +307,7 @@
       </div>
     </div>
 
+    <script src="./admin/js/jquery.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/tiny-slider.js"></script>
     <script src="js/aos.js"></script>

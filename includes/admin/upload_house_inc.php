@@ -12,6 +12,14 @@
         $total_files = count($_FILES['house_image']['name']);
         $files_array = array();
 
+        // Check if no image is chosen
+        if ($total_files == 1 && empty($_FILES['house_image']['name'][0])) {
+            $error_msg = "Choose at least one image";
+            $encoded_error_msg = urlencode($error_msg);
+            header("location: ../../admin/houses/create.php?error=$encoded_error_msg");
+            exit();
+        }
+
         //loop over them
         for($i = 0; $i < $total_files; $i++) {
             $image_name = $_FILES['house_image']['name'][$i];
@@ -57,7 +65,7 @@
 
                 $success_msg = "New Listing Added";
                 $encoded_success_msg = urlencode($success_msg);
-                header("location: ../../admin/houses/create.php?error=$encoded_success_msg");
+                header("location: ../../admin/houses/create.php?success=$encoded_success_msg");
                 exit();
             }else{
                 $error_msg = "Something went wrong";

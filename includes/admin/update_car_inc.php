@@ -11,6 +11,14 @@
         $total_files = count($_FILES['car_image']['name']);
         $files_array = array();
 
+        // Check if no image is chosen
+        if ($total_files == 1 && empty($_FILES['car_image']['name'][0])) {
+            $error_msg = "Choose at least one image";
+            $encoded_error_msg = urlencode($error_msg);
+            header("location: ../../admin/cars/single_listing_car.php?id=$car_id&error=$encoded_error_msg");
+            exit();
+        }
+
         //loop over them
         for($i = 0; $i < $total_files; $i++) {
             $image_name = $_FILES['car_image']['name'][$i];
@@ -31,7 +39,7 @@
         if(empty($car_name) || empty($car_price) || empty($kilometres) || empty($car_des) || empty($car_status)) {
             $error_msg = "Fill all fields please";
             $encoded_error_msg = urlencode($error_msg);
-            header("location: ../../admin/cars/single_listing_car.php?id=$car_id?error=$encoded_error_msg");
+            header("location: ../../admin/cars/single_listing_car.php?id=$car_id&error=$encoded_error_msg");
             exit();
         }else {
             $update_query = "UPDATE `cars` SET `car_name`=?, `car_price`=?,  `kilometres`=?,  `description`=?, `status`=?,  `images`=? WHERE `id` = ?";
@@ -45,12 +53,12 @@
                 move_uploaded_file($profile_img_tmp, $profile_img_directory);
                 $success_msg = "Listing updated";
                 $encoded_success_msg = urlencode($success_msg);
-                header("location: ../../admin/cars/single_listing_car.php?id=$car_id?error=$encoded_success_msg");
+                header("location: ../../admin/cars/single_listing_car.php?id=$car_id&success=$encoded_success_msg");
                 exit();
             }else{
                 $error_msg = "Something went wrong";
                 $encoded_error_msg = urlencode($error_msg);
-                header("location: ../../admin/cars/single_listing_car.php?id=$house_id?error=$encoded_error_msg");
+                header("location: ../../admin/cars/single_listing_car.php?id=$house_id&error=$encoded_error_msg");
                 exit();
             }
 
@@ -99,7 +107,7 @@
             session_destroy();
             $success_msg = "Listing is deleted";
             $encoded_success_msg = urlencode($success_msg);
-            header("location: ../../admin/cars/create.php?error=$encoded_success_msg");
+            header("location: ../../admin/cars/create.php?success=$encoded_success_msg");
             exit();
 
         }

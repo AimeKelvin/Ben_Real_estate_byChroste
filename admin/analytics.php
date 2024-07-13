@@ -76,10 +76,25 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
 </head>
 <body>
     <?php include './mobilemenu.php'; ?>
+    <?php
+      //Success
+        if (isset($_GET['success'])) {
+            // Decode the message
+            $msg = urldecode($_GET['success']);
+
+            echo '<span class="success-toast" style="position: absolute; bottom: 20px; left: 20px; padding: 20px; border-radius: 10px; color: #fff; font-weight: bold; z-index: 20; background-color: rgb(76, 211, 227); margin-left: 10px; margin-top: 10px;">' . htmlspecialchars($msg) . '</span>';
+
+            unset($_GET['success']);
+    
+        }
+    ?>
+
     <div class="w-full h-[100vh]">
         <!--Navigation-->
         <div class="w-full h-[80px] border-[1px] border-solid border-gray-300 bg-white p-[10px] fixed top-0 left-0 right-0 flex flex-row justify-between items-center">
@@ -329,12 +344,18 @@
                                 while($fetch = $result->fetch_assoc()) {
                                     echo '
                                         <div class="w-full p-[15px]">
-                                            <div class="flex flex-row space-x-[20px]">
+                                            <div class="flex flex-row items-center space-x-[20px]">
                                                 <div>
-                                                    <div class="bg-sky-500 rounded-full w-[30px] h-[30px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white">L</div>
+                                                    <div class="bg-sky-500 rounded-full w-[30px] h-[30px] cursor-pointer flex justify-center items-center font-bold text-[16px] text-white">C</div>
                                                 </div>
-                                                <div class="flex flex-col">
-                                                    <div class="text-[14px] font-bold text-slate-300 select-none">' .$fetch['name']. ' | ' .$fetch['email']. '</div>
+                                                <div class="flex flex-col border-b border-gray-300 border-solid ">
+                                                    <div class="text-[14px] font-bold text-slate-300 select-none">' .$fetch['name']. ' | ' .$fetch['email']. '
+                                                        <form action="../includes/admin/delete_feedback_inc.php" method="POST">
+                                                            <Input type="text" class="hidden" value="' .$fetch['id']. '" name="feedback_id">
+                                                            <button type="submit" name="delete_feedback_btn" class="bg-red-300 hover:bg-red-500 rounded-full w-[30px] h-[30px] outline-0 font-bold cursor-pointer text-white"><i class="fa-solid fa-trash"></i></button>
+                                                        </form>
+                                                    </div>
+
                                                     <div class="text-[16px] font-bold text-pink-500 select-none">' .$fetch['message']. '</div>
                                                 </div>
                                             </div>
@@ -417,6 +438,7 @@
     </div>
 
     <script src="./js/menu.js"></script>
+    <script src="./js/jquery.js"></script>
 
     <script>
         // Get the context of the canvas element we want to select

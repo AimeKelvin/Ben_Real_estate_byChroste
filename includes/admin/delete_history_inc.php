@@ -14,7 +14,7 @@
 
             $success_msg = "You deleted one history";
             $encoded_success_msg = urlencode($success_msg);
-            header("location: ../../admin/history.php?error=$encoded_success_msg");
+            header("location: ../../admin/history.php?success=$encoded_success_msg");
             exit();
 
         }
