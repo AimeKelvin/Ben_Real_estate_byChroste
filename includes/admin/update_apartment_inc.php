@@ -8,6 +8,7 @@
         $apartment_des = $_POST['description'];
         $number_bed_rooms = $_POST['number_bed_rooms'];
         $apartment_status = $_POST['status'];
+        $location = $_POST['location'];
 
         $apartment_id = $_POST['id'];
 
@@ -39,16 +40,16 @@
 
         $files_array = json_encode($files_array);
    
-        if(empty($apartment_title) || empty($apartment_price) || empty($number_rooms) || empty($apartment_des) || empty($number_bed_rooms) || empty($apartment_status)) {
+        if(empty($apartment_title) || empty($apartment_price) || empty($number_rooms) || empty($apartment_des) || empty($number_bed_rooms) || empty($apartment_status) || $location) {
             $error_msg = "Fill all fields please";
             $encoded_error_msg = urlencode($error_msg);
             header("location: ../../admin/apartments/single_listing_apartment.php?id=$apartment_id&error=$encoded_error_msg");
             exit();
         }else {
-            $update_query = "UPDATE `apartments` SET `apartment_title`=?, `apartment_price`=?,  `apartment_des`=?,  `number_rooms`=?, `number_bedrooms`=?, `status`=?,  `images`=? WHERE `id` = ?";
+            $update_query = "UPDATE `apartments` SET `apartment_title`=?, `apartment_price`=?,  `apartment_des`=?,  `number_rooms`=?, `number_bedrooms`=?, `status`=?,  `images`=?, `location`=? WHERE `id` = ?";
             $stmt = $connect->prepare($update_query);
 
-            $stmt->bind_param('ssssssss', $apartment_title, $apartment_price, $apartment_des,  $number_rooms, $number_bed_rooms, $apartment_status, $files_array, $apartment_id);
+            $stmt->bind_param('sssssssss', $apartment_title, $apartment_price, $apartment_des,  $number_rooms, $number_bed_rooms, $apartment_status, $files_array, $location, $apartment_id);
 
             $stmt->execute();
 

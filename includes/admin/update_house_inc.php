@@ -8,6 +8,7 @@
         $house_des = $_POST['description'];
         $number_bed_rooms = $_POST['number_bed_rooms'];
         $house_status = $_POST['status'];
+        $location = $_POST['location'];
         $house_id = $_POST['id'];
 
         $total_files = count($_FILES['house_image']['name']);
@@ -38,16 +39,16 @@
 
         $files_array = json_encode($files_array);
 
-        if(empty($house_title) || empty($house_price) || empty($number_rooms) || empty($house_des) || empty($number_bed_rooms) || empty($house_status)) {
+        if(empty($house_title) || empty($house_price) || empty($number_rooms) || empty($house_des) || empty($number_bed_rooms) || empty($house_status) || empty($location)) {
             $error_msg = "Fill all fields please";
             $encoded_error_msg = urlencode($error_msg);
             header("location: ../../admin/houses/single_listing_house.php?id=$house_id&error=$encoded_error_msg");
             exit();
         }else {
-            $update_query = "UPDATE `houses` SET `house_title`=?, `house_price`=?,  `house_des`=?,  `number_rooms`=?,  `number_bedrooms`=?,  `status`=?,  `images`=? WHERE `id` = ?";
+            $update_query = "UPDATE `houses` SET `house_title`=?, `house_price`=?,  `house_des`=?,  `number_rooms`=?,  `number_bedrooms`=?,  `status`=?,  `images`=?, `location`=? WHERE `id` = ?";
             $stmt = $connect->prepare($update_query);
 
-            $stmt->bind_param('ssssssss', $house_title, $house_price, $house_des,  $number_rooms, $number_bed_rooms, $house_status, $files_array, $house_id);
+            $stmt->bind_param('sssssssss', $house_title, $house_price, $house_des,  $number_rooms, $number_bed_rooms, $house_status, $files_array, $location, $house_id);
 
             $stmt->execute();
 

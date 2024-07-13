@@ -135,11 +135,11 @@
 
                     $searchQuery = $connect->real_escape_string($_GET['q']); 
                     $query = "
-                        SELECT 'car' AS type, id, car_name AS title, car_price AS price, images, NULL AS number_rooms, NULL AS number_bedrooms FROM cars WHERE car_name LIKE '%$searchQuery%'
+                        SELECT 'car' AS type, id, car_name AS title, location AS location, car_price AS price, images, NULL AS number_rooms, NULL AS number_bedrooms FROM cars WHERE car_name LIKE '%$searchQuery%'
                         UNION
-                        SELECT 'apartment' AS type, id, apartment_title AS title, apartment_price AS price, images, number_rooms, number_bedrooms FROM apartments WHERE apartment_title LIKE '%$searchQuery%'
+                        SELECT 'apartment' AS type, id, apartment_title AS title, location AS location, apartment_price AS price, images, number_rooms, number_bedrooms FROM apartments WHERE apartment_title LIKE '%$searchQuery%'
                         UNION
-                        SELECT 'house' AS type, id, house_title AS title, house_price AS price, images, number_rooms, number_bedrooms FROM houses WHERE house_title LIKE '%$searchQuery%'
+                        SELECT 'house' AS type, id, house_title AS title, location AS location, house_price AS price, images, number_rooms, number_bedrooms FROM houses WHERE house_title LIKE '%$searchQuery%'
                     ";
                     $result = $connect->query($query);
 
@@ -191,6 +191,20 @@
                                     break;
                             }
 
+                            // Determine the location field based on the type of listing
+                            $location = '';
+                            switch ($row['type']) {
+                                case 'car':
+                                    $location = $row['location'];
+                                    break;
+                                case 'apartment':
+                                    $location = $row['location'];
+                                    break;
+                                case 'house':
+                                    $location = $row['location'];
+                                    break;
+                            }
+
                             // Determine the details link based on the type of listing
                             $detailsLink = '';
                             switch ($row['type']) {
@@ -215,20 +229,8 @@
                                         <div class="property-content">
                                             <div class="price mb-2"><span>' . htmlspecialchars($price) . '</span></div>
                                             <div>
-                                                <span class="d-block mb-2 text-black-50">5232 California Fake, Ave. 21BC</span>
+                                                <span class="d-block mb-2 text-black-50">' .$location. '</span>
                                                 <span class="city d-block mb-3">' . htmlspecialchars($title) . '</span>
-
-                                                <div class="specs d-flex mb-4">
-                                                    <span class="d-block d-flex align-items-center me-3">
-                                                        <span class="icon-bed me-2"></span>
-                                                        <span class="caption">' . htmlspecialchars($row['number_rooms']) . ' Rooms</span>
-                                                    </span>
-                                                    <span class="d-block d-flex align-items-center">
-                                                        <span class="icon-bath me-2"></span>
-                                                        <span class="caption">' . htmlspecialchars($row['number_bedrooms']) . ' Bathrooms</span>
-                                                    </span>
-                                                </div>
-
                                                 <a href="' . $detailsLink . '" class="btn btn-primary py-2 px-3">See details</a>
                                             </div>
                                         </div>

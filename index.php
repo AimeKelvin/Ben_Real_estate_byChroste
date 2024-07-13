@@ -187,7 +187,7 @@
                                     <div class="price mb-2"><span>' .$fetch['house_price']. '</span></div>
                                     <div>
                                       <span class="d-block mb-2 text-black-50"
-                                        >5232 California Fake, Ave. 21BC</span
+                                        >' .$fetch['location']. '</span
                                       >
                                       <span class="city d-block mb-3">' .$fetch['house_title']. '</span>
 

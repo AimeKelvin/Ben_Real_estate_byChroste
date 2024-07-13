@@ -6,6 +6,7 @@
         $car_price = $_POST['price'];
         $kilometres = $_POST['kilometres'];
         $car_des = $_POST['description'];
+        $location = $_POST['location'];
         $car_status = $_POST['status'];
 
         $total_files = count($_FILES['car_image']['name']);
@@ -36,17 +37,17 @@
 
         $files_array = json_encode($files_array);
    
-        if(empty($car_name) || empty($car_price) || empty($kilometres) || empty($car_des) || empty($car_status)) {
+        if(empty($car_name) || empty($car_price) || empty($kilometres) || empty($car_des) || empty($car_status) || empty($location)) {
             $error_msg = "Fill all fields please";
             $encoded_error_msg = urlencode($error_msg);
             header("location: ../../admin/cars/create.php?error=$encoded_error_msg");
             exit();
         }else {
-            $insert_car = "INSERT INTO `cars` (`car_name`,`car_price`, `kilometres`, `description`, `status`, `images`) VALUES(?,?,?,?,?,?)";
+            $insert_car = "INSERT INTO `cars` (`car_name`,`car_price`, `kilometres`, `description`, `status`, `images`, `location`) VALUES(?,?,?,?,?,?,?)";
 
             $stmt = $connect->prepare($insert_car);
  
-            $stmt->bind_param('ssssss' , $car_name, $car_price, $kilometres, $car_des, $car_status, $files_array);
+            $stmt->bind_param('sssssss' , $car_name, $car_price, $kilometres, $car_des, $car_status, $files_array, $location);
 
             //execute
             $stmt->execute();
