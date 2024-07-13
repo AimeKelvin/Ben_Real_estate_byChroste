@@ -151,8 +151,8 @@
                 <i class="icon-room"></i>
                 <h4 class="mb-2">Location:</h4>
                 <p>
-                  43 Raymouth Rd. Baltemoer,<br />
-                  London 3910
+                  Kacyiru,<br />
+                  KG 572 Street
                 </p>
               </div>
 
@@ -160,21 +160,21 @@
                 <i class="icon-clock-o"></i>
                 <h4 class="mb-2">Open Hours:</h4>
                 <p>
-                  Sunday-Friday:<br />
-                  11:00 AM - 2300 PM
+                  Monday-Friday:<br />
+                  11:00 AM - 23:00 PM
                 </p>
               </div>
 
               <div class="email mt-4">
                 <i class="icon-envelope"></i>
                 <h4 class="mb-2">Email:</h4>
-                <p>info@Untree.co</p>
+                <p>benrealestate24@gmail.com</p>
               </div>
 
               <div class="phone mt-4">
                 <i class="icon-phone"></i>
                 <h4 class="mb-2">Call:</h4>
-                <p>+1 1234 55488 55</p>
+                <p>+250 788 558 218</p>
               </div>
             </div>
           </div>
@@ -206,13 +206,15 @@
     </div>
     <!-- /.untree_co-section -->
 
+
     <div class="site-footer">
       <div class="container">
         <div class="row">
           <div class="col-lg-4">
             <div class="widget">
               <h3>Contact</h3>
-              <address>43 Raymouth Rd. Baltemoer, London 3910</address>
+            
+              <address>Kacyiru, KG 572 Street</address>
               <ul class="list-unstyled links">
                 <li><a href="tel://250788558218">+250 788 558 218</a></li>
                 <li>
@@ -222,11 +224,13 @@
             </div>
             <!-- /.widget -->
           </div>
-    
+          <!-- /.col-lg-4 -->
+         
+          <!-- /.col-lg-4 -->
           <div class="col-lg-4">
             <div class="widget">
               <h3>Links</h3>
-          
+              
 
               <ul class="list-unstyled social">
                 <li>
@@ -235,12 +239,28 @@
                 <li>
                   <a href="#"><span class="icon-youtube"></span></a>
                 </li>
-                
+                <li>
+                  <a href="#"><span class="icon-facebook"></span></a>
+                </li>
+               
               </ul>
             </div>
             <!-- /.widget -->
           </div>
           <!-- /.col-lg-4 -->
+
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Navigation</h3>
+              <ul class="list-unstyled float-start links">
+                <li><a href="./index.php">Home</a></li>
+                <li><a href="./services.php">Services</a></li>
+                <li><a href="./properties.php">Properties</a></li>
+                <li><a href="#">Contact us</a></li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
         </div>
         <!-- /.row -->
 
