@@ -182,7 +182,7 @@
                           }
                           echo '
                                 <div class="property-item">
-                                  <a href="property-single.html" class="img">
+                                  <a href="" class="img">
                                     <img src="./includes/admin/uploaded_houses/' .$thumbnail. '" alt="Image" style="width: 100%; height: 370px; object-fit: cover; object-position: 50% 50%;" class="img-fluid" />
                                   </a>
 
@@ -291,7 +291,7 @@
                   echo '
                       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                         <div class="property-item mb-30">
-                          <a href="property-single.html" class="img">
+                          <a href="" class="img">
                             <img src="./includes/admin/uploaded_houses/' .$thumbnail. '" alt="Image" class="img-fluid" style="width: 100%; height: 370px; object-fit: cover; object-position: 50% 50%;" />
                           </a>
 
@@ -399,7 +399,7 @@
                   echo '
                       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                         <div class="property-item mb-30">
-                          <a href="property-single.html" class="img">
+                          <a href="" class="img">
                             <img src="./includes/admin/uploaded_cars/' .$thumbnail. '" alt="Image" class="img-fluid" style="width: 100%; height: 370px; object-fit: cover; object-position: 50% 50%;" />
                           </a>
 
@@ -505,7 +505,7 @@
                   echo '
                       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                         <div class="property-item mb-30">
-                          <a href="property-single.html" class="img">
+                          <a href="" class="img">
                             <img src="./includes/admin/uploaded_apartments/' .$thumbnail. '" alt="Image" class="img-fluid" style="width: 100%; height: 370px; object-fit: cover; object-position: 50% 50%;" />
                           </a>
 
