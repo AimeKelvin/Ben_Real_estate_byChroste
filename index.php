@@ -368,7 +368,7 @@
             <div class="widget">
               <h3>Contact</h3>
               <ul class="list-unstyled links">
-                <li><a href="tel://11234567890">+250 788 558 218</a></li>
+                <li><a href="tel://250788558218">+250 788 558 218</a></li>
                 <li>
                   <a href="mailto:info@mydomain.com">benrealestate24@gmail.com</a>
                 </li>
