@@ -92,10 +92,43 @@
     </script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
 </head>
 <body>
-    <?php include '../mobilemenu.php' ?>
+    <?php
+        //Success
+        if (isset($_GET['success'])) {
+            // Decode the message
+            $msg = urldecode($_GET['success']);
+
+            echo '<span class="success-toast" style="position: absolute; bottom: 20px; left: 20px; padding: 20px; border-radius: 10px; color: #fff; font-weight: bold; z-index: 20; background-color: rgb(76, 211, 227); margin-left: 10px; margin-top: 10px;">' . htmlspecialchars($msg) . '</span>';
+
+            unset($_GET['success']);
+    
+        }
+
+
+        if (isset($_GET['error'])) {
+            // Decode the message
+            $msg = urldecode($_GET['error']);
+
+            echo '<span class="error-cont" style="position: absolute; bottom: 20px; left: 20px; padding: 20px; border-radius: 10px; color: #fff; font-weight: bold; z-index: 20; background-color: rgb(255, 76, 76); margin-left: 10px; margin-top: 10px;">' . htmlspecialchars($msg) . '</span>';
+
+            unset($_GET['error']);
+    
+        }
+    ?>
+    <div class="absolute z-9999 pt-[90px] bg-white top-0 bottom-0 left-0 right-0 w-full h-[100vh] flex justify-center items-center md:hidden" id="menu" style="display: none;">
+        <div class="flex flex-col space-y-[20px]">
+        <div class="hover:bg-slate-200 cursor-pointer p-[10px] rounded-[6px]"><a href="../analytics.php" class="font-bold text-[16px] text-slate-400 flex flex-row items-center space-x-[6px]"><i class="fa-solid fa-chart-simple text-[16px] font-bold"></i><span></span> Analytics</a></div>
+            <div class="hover:bg-slate-200 cursor-pointer p-[10px] rounded-[6px]"><a href="" class="font-bold text-[16px] text-slate-400 flex flex-row items-center space-x-[6px]"><i class="fa-solid fa-square-plus text-[16px] font-bold"></i><span></span> Create</a></div>
+            <div class="hover:bg-slate-200 cursor-pointer p-[10px] rounded-[6px]"><a href="../manage.php" class="font-bold text-[16px] flex  text-slate-400  flex-row items-center space-x-[6px]"><i class="fa-solid fa-list-check text-[16px] font-bold"></i><span></span> Management</a></div>
+            <div class="hover:bg-slate-200 cursor-pointer p-[10px] rounded-[6px]"><a href="../history.php" class="font-bold text-[16px] text-slate-400 flex flex-row items-center space-x-[6px]"><i class="fa-solid fa-trash text-[16px] font-bold"></i><span></span> History</a></div>
+        </div>
+    </div>
+    
     <div class="w-full h-[100vh]">
         <!--Navigation-->
         <div class="w-full h-[80px] border-[1px] border-solid border-gray-300 bg-white p-[10px] fixed top-0 left-0 right-0 flex flex-row justify-between items-center">
@@ -264,6 +297,7 @@
     
     <script src="../js/main.js"></script>
     <script src="../js/menu.js"></script>
+    <script src="../js/jquery.js"></script>
     
 </body>
 </html>

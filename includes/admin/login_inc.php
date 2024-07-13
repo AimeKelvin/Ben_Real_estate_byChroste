@@ -49,7 +49,7 @@
 
                 $success_msg = "You are Logined";
                 $encoded_success_msg = urlencode($success_msg);
-                header("location: ../../admin/analytics.php?error=$encoded_success_msg");
+                header("location: ../../admin/analytics.php?success=$encoded_success_msg");
                 exit();
 
             }

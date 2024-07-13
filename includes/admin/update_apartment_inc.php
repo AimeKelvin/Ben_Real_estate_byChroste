@@ -14,6 +14,14 @@
         $total_files = count($_FILES['apartment_image']['name']);
         $files_array = array();
 
+        // Check if no image is chosen
+        if ($total_files == 1 && empty($_FILES['apartment_image']['name'][0])) {
+            $error_msg = "Choose at least one image";
+            $encoded_error_msg = urlencode($error_msg);
+            header("location: ../../admin/apartments/single_listing_apartment.php?id=$apartment_id&error=$encoded_error_msg");
+            exit();
+        }
+
         //loop over them
         for($i = 0; $i < $total_files; $i++) {
             $image_name = $_FILES['apartment_image']['name'][$i];
@@ -34,7 +42,7 @@
         if(empty($apartment_title) || empty($apartment_price) || empty($number_rooms) || empty($apartment_des) || empty($number_bed_rooms) || empty($apartment_status)) {
             $error_msg = "Fill all fields please";
             $encoded_error_msg = urlencode($error_msg);
-            header("location: ../../admin/apartments/single_listing_apartment.php?id=$apartment_id?error=$encoded_error_msg");
+            header("location: ../../admin/apartments/single_listing_apartment.php?id=$apartment_id&error=$encoded_error_msg");
             exit();
         }else {
             $update_query = "UPDATE `apartments` SET `apartment_title`=?, `apartment_price`=?,  `apartment_des`=?,  `number_rooms`=?, `number_bedrooms`=?, `status`=?,  `images`=? WHERE `id` = ?";
@@ -48,12 +56,12 @@
                 move_uploaded_file($profile_img_tmp, $profile_img_directory);
                 $success_msg = "Listing updated";
                 $encoded_success_msg = urlencode($success_msg);
-                header("location: ../../admin/apartments/single_listing_apartment.php?id=$apartment_id?error=$encoded_success_msg");
+                header("location: ../../admin/apartments/single_listing_apartment.php?id=$apartment_id&success=$encoded_success_msg");
                 exit();
             }else{
                 $error_msg = "Something went wrong";
                 $encoded_error_msg = urlencode($error_msg);
-                header("location: ../../admin/apartments/single_listing_apartment.php?id=$apartment_id?error=$encoded_error_msg");
+                header("location: ../../admin/apartments/single_listing_apartment.php?id=$apartment_id&error=$encoded_error_msg");
                 exit();
             }
 
@@ -102,7 +110,7 @@
             session_destroy();
             $success_msg = "Listing is deleted";
             $encoded_success_msg = urlencode($success_msg);
-            header("location: ../../admin/apartments/create.php?error=$encoded_success_msg");
+            header("location: ../../admin/apartments/create.php?success=$encoded_success_msg");
             exit();
 
         }

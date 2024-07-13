@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # If the request corresponds to a non-existent file or directory, redirect to 404page.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ notfound.php [L]
+</IfModule>
+
+Options -Indexes

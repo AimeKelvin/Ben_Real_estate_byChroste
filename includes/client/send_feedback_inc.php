@@ -10,12 +10,12 @@
         $message = $_POST["msg"];
 
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $error_msg = "Invalid email !";
+            $error_msg = "Invalid email";
             $encoded_msg = urlencode($error_msg);
-            header(" ../../contact.php?msg_error=$encoded_msg");
+            header("location: ../../contact.php?error=$encoded_msg");
             exit();
         }elseif(empty($name) || empty($email) || empty($subject) || empty($message)) {
-            $error_msg = "Fill all fields";
+            $error_msg = "Fill all the fields";
             $encoded_error_msg = urlencode($error_msg);
             header("location: ../../contact.php?error=$encoded_error_msg");
             exit();
@@ -31,7 +31,7 @@
             if($stmt->affected_rows > 0 ) {
                 $success_msg = "You message is sent";
                 $encoded_success_msg = urlencode($success_msg);
-                header("location: ../../contact.php?error=$encoded_success_msg");
+                header("location: ../../contact.php?success=$encoded_success_msg");
                 exit();
             }else{
                 $error_msg = "Something went wrong";

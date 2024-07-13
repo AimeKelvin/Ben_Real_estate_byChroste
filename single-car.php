@@ -207,18 +207,18 @@
 
             <div>
               <h2 class="heading text-primary">Make a Deal</h2>
-              <form action="" method="POST">
+              <form action="./includes/admin/add_new_deal.php" method="POST">
                 <div>
-                  <input type="text" style="display: none;" value="">
+                  <input type="text" style="display: none;" name="listing_name" value="<?php echo $output_fetch['car_name']; ?>">
                 </div>
                 <div style="margin-bottom: 10px;">
                   <input type="text" name="name" class="form-control" placeholder="Your Name"/>
                 </div>
                 <div style="margin-bottom: 10px;">
-                  <input type="text" name="name" class="form-control" placeholder="Your Number"/>
+                  <input type="text" name="phone" class="form-control" placeholder="Your Number"/>
                 </div>
                 <div>
-                  <input type="submit" name="send_btn" value="Send Message"class="btn btn-primary"/>
+                  <input type="submit" name="send_deal_btn" value="Send Message"class="btn btn-primary"/>
                 </div>
               </form>
             </div>

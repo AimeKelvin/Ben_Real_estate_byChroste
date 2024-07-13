@@ -13,6 +13,14 @@
         $total_files = count($_FILES['house_image']['name']);
         $files_array = array();
 
+        // Check if no image is chosen
+        if ($total_files == 1 && empty($_FILES['house_image']['name'][0])) {
+            $error_msg = "Choose at least one image";
+            $encoded_error_msg = urlencode($error_msg);
+            header("location: ../../admin/houses/single_listing_house.php?id=$house_id&error=$encoded_error_msg");
+            exit();
+        }
+
         //loop over them
         for($i = 0; $i < $total_files; $i++) {
             $image_name = $_FILES['house_image']['name'][$i];
@@ -33,7 +41,7 @@
         if(empty($house_title) || empty($house_price) || empty($number_rooms) || empty($house_des) || empty($number_bed_rooms) || empty($house_status)) {
             $error_msg = "Fill all fields please";
             $encoded_error_msg = urlencode($error_msg);
-            header("location: ../../admin/houses/single_listing_house.php?id=$house_id?error=$encoded_error_msg");
+            header("location: ../../admin/houses/single_listing_house.php?id=$house_id&error=$encoded_error_msg");
             exit();
         }else {
             $update_query = "UPDATE `houses` SET `house_title`=?, `house_price`=?,  `house_des`=?,  `number_rooms`=?,  `number_bedrooms`=?,  `status`=?,  `images`=? WHERE `id` = ?";
@@ -47,12 +55,12 @@
                 move_uploaded_file($profile_img_tmp, $profile_img_directory);
                 $success_msg = "Listing updated";
                 $encoded_success_msg = urlencode($success_msg);
-                header("location: ../../admin/houses/single_listing_house.php?id=$house_id?error=$encoded_success_msg");
+                header("location: ../../admin/houses/single_listing_house.php?id=$house_id&success=$encoded_success_msg");
                 exit();
             }else{
                 $error_msg = "Something went wrong";
                 $encoded_error_msg = urlencode($error_msg);
-                header("location: ../../admin/houses/single_listing_house.php?id=$house_id?error=$encoded_error_msg");
+                header("location: ../../admin/houses/single_listing_house.php?id=$house_id&error=$encoded_error_msg");
                 exit();
             }
 

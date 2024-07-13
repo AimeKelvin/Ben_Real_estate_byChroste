@@ -22,8 +22,33 @@
           }
         }
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 <body>
+    <?php
+        //Success
+        if (isset($_GET['success'])) {
+            // Decode the message
+            $msg = urldecode($_GET['success']);
+
+            echo '<span class="success-toast" style="position: absolute; bottom: 20px; left: 20px; padding: 20px; border-radius: 10px; color: #fff; font-weight: bold; z-index: 20; background-color: rgb(76, 211, 227); margin-left: 10px; margin-top: 10px;">' . htmlspecialchars($msg) . '</span>';
+
+            unset($_GET['success']);
+    
+        }
+
+
+        if (isset($_GET['error'])) {
+            // Decode the message
+            $msg = urldecode($_GET['error']);
+
+            echo '<span class="error-cont" style="position: absolute; bottom: 20px; left: 20px; padding: 20px; border-radius: 10px; color: #fff; font-weight: bold; z-index: 20; background-color: rgb(255, 76, 76); margin-left: 10px; margin-top: 10px;">' . htmlspecialchars($msg) . '</span>';
+
+            unset($_GET['error']);
+    
+        }
+    ?>
     <div class="w-full h-[100vh] flex justify-center items-center">
         <div class="w-full h-full p-[30px] rounded-[12px] border-[2px] border-solid border-gray-300 flex flex-col justify-center md:w-[500px] md:h-[500px]">
             <div class="text-[18px] font-black text-center text-slate-300 select-none">Admin Login</div>
@@ -40,5 +65,7 @@
             </form>
         </div>
     </div>
+
+    <script src="./js/jquery.js"></script>
 </body>
 </html>
