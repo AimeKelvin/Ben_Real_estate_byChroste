@@ -202,6 +202,7 @@
                     <p class="text-slate-400 font-bold text-[18px]">Description: <span class="text-blue-400"><?php echo $output_fetch['house_des'] ?></span></p>
                     <p class="text-slate-400 font-bold text-[18px]">Number of rooms: <span class="text-blue-400"><?php echo $output_fetch['number_rooms'] ?></span></p>
                     <p class="text-slate-400 font-bold text-[18px]">Number of bedrooms: <span class="text-blue-400"><?php echo $output_fetch['number_bedrooms'] ?></span></p>
+                    <p class="text-slate-400 font-bold text-[18px]">Location: <span class="text-blue-400"><?php echo $output_fetch['location'] ?></span></p>
                     <p class="text-slate-400 font-bold text-[18px]">Status: <span class="text-blue-400"><?php echo $output_fetch['status'] ?></span></p>
                 </div>
 
@@ -246,6 +247,9 @@
                                 </div>
                                 <div>
                                     <input type="text" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0" placeholder="Price" value="<?php echo $output_fetch['house_price'] ?>" name="price">
+                                </div>
+                                <div>
+                                    <input type="text" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0" placeholder="Location" value="<?php echo $output_fetch['location'] ?>" name="location">
                                 </div>
                                 <div>
                                     <input list="rooms" name="number_rooms" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0" value="<?php echo $output_fetch['number_rooms'] ?>" placeholder="Number of rooms">

@@ -200,6 +200,7 @@
                     <p class="text-slate-400 font-bold text-[18px]">Price: <span class="text-blue-400"><?php echo $output_fetch['car_price'] ?></span></p>
                     <p class="text-slate-400 font-bold text-[18px]">Kilometres: <span class="text-blue-400"><?php echo $output_fetch['kilometres'] ?></span></p>
                     <p class="text-slate-400 font-bold text-[18px]">Description: <span class="text-blue-400"><?php echo $output_fetch['description'] ?></span></p>
+                    <p class="text-slate-400 font-bold text-[18px]">Location: <span class="text-blue-400"><?php echo $output_fetch['location'] ?></span></p>
                     <p class="text-slate-400 font-bold text-[18px]">Status: <span class="text-blue-400"><?php echo $output_fetch['status'] ?></span></p>
                 </div>
 
@@ -247,6 +248,9 @@
                                 </div>
                                 <div>
                                     <input type="text" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0" placeholder="Kilometres" value="<?php echo $output_fetch['kilometres'] ?>" name="kilometres">
+                                </div>
+                                <div>
+                                    <input type="text" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0" placeholder="Location" value="<?php echo $output_fetch['location'] ?>" name="location">
                                 </div>
                                 <div>
                                     <textarea name="description" placeholder="Product Description" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full h-[150px] pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0"><?php echo $output_fetch['description'] ?></textarea>

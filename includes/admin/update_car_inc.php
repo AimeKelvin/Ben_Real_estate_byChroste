@@ -7,6 +7,7 @@
         $kilometres = $_POST['kilometres'];
         $car_des = $_POST['description'];
         $car_status = $_POST['status'];
+        $location = $_POST['location'];
         $car_id = $_POST['id'];
         $total_files = count($_FILES['car_image']['name']);
         $files_array = array();
@@ -36,16 +37,16 @@
 
         $files_array = json_encode($files_array);
    
-        if(empty($car_name) || empty($car_price) || empty($kilometres) || empty($car_des) || empty($car_status)) {
+        if(empty($car_name) || empty($car_price) || empty($kilometres) || empty($car_des) || empty($car_status) || empty($location)) {
             $error_msg = "Fill all fields please";
             $encoded_error_msg = urlencode($error_msg);
             header("location: ../../admin/cars/single_listing_car.php?id=$car_id&error=$encoded_error_msg");
             exit();
         }else {
-            $update_query = "UPDATE `cars` SET `car_name`=?, `car_price`=?,  `kilometres`=?,  `description`=?, `status`=?,  `images`=? WHERE `id` = ?";
+            $update_query = "UPDATE `cars` SET `car_name`=?, `car_price`=?,  `kilometres`=?,  `description`=?, `status`=?,  `images`=?, `location`=? WHERE `id` = ?";
             $stmt = $connect->prepare($update_query);
 
-            $stmt->bind_param('sssssss', $car_name, $car_price, $kilometres, $car_des, $car_status, $files_array, $car_id);
+            $stmt->bind_param('ssssssss', $car_name, $car_price, $kilometres, $car_des, $car_status, $files_array, $location, $car_id);
 
             $stmt->execute();
 

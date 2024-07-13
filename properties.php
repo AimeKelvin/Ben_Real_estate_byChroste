@@ -190,7 +190,7 @@
                                     <div class="price mb-2"><span>' .$fetch['house_price']. '</span></div>
                                     <div>
                                       <span class="d-block mb-2 text-black-50"
-                                        >5232 California Fake, Ave. 21BC</span
+                                        >' .$fetch['location']. '</span
                                       >
                                       <span class="city d-block mb-3">' .$fetch['house_title']. '</span>
 
@@ -299,7 +299,7 @@
                             <div class="price mb-2"><span>' .$fetch['house_price']. '</span></div>
                             <div>
                               <span class="d-block mb-2 text-black-50"
-                                >5232 California Fake, Ave. 21BC</span
+                                >' .$fetch['location']. '</span
                               >
                               <span class="city d-block mb-3">' .$fetch['house_title']. '</span>
 
@@ -407,18 +407,16 @@
                             <div class="price mb-2"><span>' .$fetch['car_price']. '</span></div>
                             <div>
                               <span class="d-block mb-2 text-black-50"
-                                >5232 California Fake, Ave. 21BC</span
+                                >' .$fetch['location']. '</span
                               >
                               <span class="city d-block mb-3">' .$fetch['car_name']. '</span>
 
                               <div class="specs d-flex mb-4">
                                 <span class="d-block d-flex align-items-center me-3">
-                                  <span class="icon-bed me-2"></span>
                                   <span class="caption">' .$fetch['kilometres']. '</span>
                                 </span>
                                 <span class="d-block d-flex align-items-center">
-                                  <span class="icon-bath me-2"></span>
-                                  <span class="caption">' .$fetch['status']. '</span>
+                                  <span class="caption" style="text-transform: capitalize;">' .$fetch['status']. '</span>
                                 </span>
                               </div>
 
@@ -515,7 +513,7 @@
                             <div class="price mb-2"><span>' .$fetch['apartment_price']. '</span></div>
                             <div>
                               <span class="d-block mb-2 text-black-50"
-                                >5232 California Fake, Ave. 21BC</span
+                                >' .$fetch['location']. '</span
                               >
                               <span class="city d-block mb-3">' .$fetch['apartment_title']. '</span>
 

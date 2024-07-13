@@ -184,22 +184,22 @@
           </div>
           <div class="col-lg-4">
             <h2 class="heading text-primary"><?php echo $car_title; ?></h2>
-            <p class="meta">California, United States</p>
+            <p class="meta"><?php echo $output_fetch['location']; ?></p>
             <p class="text-black-50">
               <?php echo $output_fetch['description']; ?>
             </p>
             <div style="margin-bottom: 30px;">
                 <div class="specs d-flex mb-4">
                   <span class="d-block d-flex align-items-center me-3">
-                    <span class="icon-bed me-2"></span>
                     <span class="caption"><?php echo $output_fetch['kilometres']; ?></span>
                   </span>
                   <span class="d-block d-flex align-items-center" style="margin-right: 20px;">
-                    <span class="icon-bath me-2"></span>
                     <span class="caption"><?php echo $output_fetch['car_price']; ?></span>
                   </span>
+                  <span class="d-block d-flex align-items-center" style="margin-right: 20px;">
+                    <span class="caption"><?php echo $output_fetch['location']; ?></span>
+                  </span>
                   <span class="d-block d-flex align-items-center">
-                    <span class="icon-bath me-2"></span>
                     <span class="caption" style="text-transform: capitalize;"><?php echo $output_fetch['status']; ?></span>
                   </span>
                 </div>
