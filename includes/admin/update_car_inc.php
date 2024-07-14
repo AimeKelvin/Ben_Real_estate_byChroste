@@ -116,3 +116,6 @@
         $stmt->close();
         
     }
+
+    //mark as sold
+    

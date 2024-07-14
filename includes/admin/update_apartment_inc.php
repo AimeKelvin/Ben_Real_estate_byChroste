@@ -119,3 +119,74 @@
         $stmt->close();
         
     }
+
+    //mark as sold and delete
+    if(isset($_POST['mark_sold_btn'])) {
+        $price = $_POST['price'];
+        $apartment_id = $_POST['apartment_id'];
+
+        
+
+        $insert_sale = "INSERT INTO `sales` (`price`) VALUES(?)";
+
+        $stmt = $connect->prepare($insert_sale);
+
+        $stmt->bind_param('s' , $price);
+
+        //execute
+        $stmt->execute();
+
+        if($stmt->affected_rows > 0) {
+            //Save the history in the history table
+            $action = "New Sale Made";
+            
+            $add_history = "INSERT INTO `history` (`action`) VALUES(?)";
+            $stmt = $connect->prepare($add_history);
+
+            $stmt->bind_param('s', $action);
+
+            $stmt->execute();
+
+            //then delete the listing
+            $select_query = "SELECT images FROM `apartments` WHERE id = ?";
+            $stmt = $connect->prepare($select_query);
+            $stmt->bind_param('i', $apartment_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $apartment = $result->fetch_assoc();
+            
+
+            if($apartment) {
+                // Decode the images JSON
+                $images = json_decode($apartment['images'], true);
+
+                // Delete each image from the server
+                foreach($images as $image) {
+                    $file_path = 'uploaded_apartments/' . $image;
+                    if(file_exists($file_path)) {
+                        unlink($file_path);
+                    }
+                }
+            } 
+
+            $delete_query = "DELETE FROM `apartments` WHERE `id` = ?";
+            $stmt = $connect->prepare($delete_query);
+
+            $stmt->bind_param('i', $apartment_id);
+            $stmt->execute();
+
+            $success_msg = "New Sale Added";
+            $encoded_success_msg = urlencode($success_msg);
+            header("location: ../../admin/analytics.php?error=$encoded_success_msg");
+            exit();
+        }else{
+            $error_msg = "Something went wrong";
+            $encoded_error_msg = urlencode($error_msg);
+            header("location: ../../admin/analytics.php?error=$encoded_error_msg");
+            exit();
+        }
+
+        $stmt->close();
+        
+    }
+
