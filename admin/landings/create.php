@@ -9,7 +9,7 @@
     if(!$admin_id || empty($admin_id)) {
         $error_msg = "You have to login";
         $encoded_error_msg = urlencode($error_msg);
-        header("location: login.php?error=$encoded_error_msg");
+        header("location: ../login.php?error=$encoded_error_msg");
         exit();
     }
 
@@ -125,7 +125,7 @@
                     </div>
                 </div>
                 <div class="pl-[10px]">
-                    <form action="../includes/admin/logout_inc.php" method="POST">
+                    <form action="../../includes/admin/logout_inc.php" method="POST">
                         <button type="submit" class="bg-red-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold" name="logout_btn">Logout</button>
                     </form>
                 </div>
@@ -154,7 +154,7 @@
                     <div><a href="../cars/create.php" class="bg-blue-300 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-car text-white font-bold"></i><span></span> <span class="hidden md:inline-flex">Add Vehicle</span></a></div>
                     <div><a href="../houses/create.php" class="bg-blue-300 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-house text-white font-bold"></i><span></span> <span class="hidden md:inline-flex">Add House</span></a></div>
                     <div><a href="../apartments/create.php" class="bg-blue-300 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-building text-white font-bold"></i><span></span> <span class="hidden md:inline-flex">Add Apartment</a></span></div>
-                    <div><a href="#" class="bg-blue-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-building text-white font-bold"></i><span></span> <span class="hidden md:inline-flex">Add Landing</a></span></div>
+                    <div><a href="#" class="bg-blue-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-land-mine-on text-white font-bold"></i><span></span> <span class="hidden md:inline-flex">Add Landing</a></span></div>
                 </div>
                 <!--No of images-->
                 <div id="images-number" class="p-[4px] mb-[3px] flex justify-center items-center w-[40px] bg-blue-500 rounded-full h-[40px] font-bold text-[16px] text-white">0</div>

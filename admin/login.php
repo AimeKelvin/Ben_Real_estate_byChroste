@@ -1,3 +1,24 @@
+<?php
+    session_start();
+
+    include '../config/db.php';
+
+    $admin_id = $_SESSION['id'];
+
+
+    if($admin_id) {
+        $error_msg = "First Logout";
+        $encoded_error_msg = urlencode($error_msg);
+        header("location: analytics.php?error=$encoded_error_msg");
+        exit();
+    }
+
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -215,7 +215,7 @@
                   <input type="text" name="phone" class="form-control" placeholder="Your Number"/>
                 </div>
                 <div>
-                  <input type="submit" name="send_deal_btn" value="Send Message"class="btn btn-primary"/>
+                  <input type="submit" name="send_deal_btn" value="Make Deal"class="btn btn-primary"/>
                 </div>
               </form>
             </div>
