@@ -3,16 +3,16 @@
 
     include '../config/db.php';
 
-    $admin_id = $_SESSION['id'];
-
-
-    if($admin_id) {
-        $error_msg = "First Logout";
-        $encoded_error_msg = urlencode($error_msg);
-        header("location: analytics.php?error=$encoded_error_msg");
-        exit();
+    if (isset($_SESSION['id'])) {
+        $admin_id = $_SESSION['id'];
+    
+        if ($admin_id) {
+            $error_msg = "First Logout";
+            $encoded_error_msg = urlencode($error_msg);
+            header("location: analytics.php?error=$encoded_error_msg");
+            exit();
+        }
     }
-
 
 
 

@@ -25,7 +25,7 @@
             $fetch = $result->fetch_assoc();
 
             if(!$fetch > 0) {
-                $error_msg = "This is not a user";
+                $error_msg = "Not Authorized";
                 $encoded_error_msg = urlencode($error_msg);
                 header("location: ../../admin/login.php?error=$encoded_error_msg");
                 exit();
