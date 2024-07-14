@@ -342,7 +342,7 @@
                                             </div>
                                             <div class="p-[10px] rounded-[4px]">
                                                 <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">' .$fetch['car_price']. '</div>
-                                                <p class="font-md text-[14px] text-slate-500 select-none text-start">$trimmedText</p>
+                                                <p class="font-md text-[14px] text-slate-500 select-none text-start">'. $trimmedText. '</p>
                                                 <a href="../admin/cars/single_listing_car.php?id=' .$fetch['id']. '" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
                                             </div>
                                         </div>
@@ -353,6 +353,63 @@
                             }else {
                                 echo '
                                     <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">No Cars Added</div>
+
+                                ';
+                            }
+                        
+                        ?>
+
+                    </div>
+                </div>
+
+                <div>
+                    <div class="text-[18px] font-black text-slate-300 select-none mt-[20px] mb-[30px]">Added Landings</div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 space-x-[4px]">
+                        <?php
+                            $fetch_cars = "SELECT * FROM `landings`";
+
+                            $stmt = $connect->prepare($fetch_cars);
+    
+                            $stmt->execute();
+    
+                            $result = $stmt->get_result();
+
+                            function trimTextLanding($text, $maxLength = 30) {
+                                if (strlen($text) > $maxLength) {
+                                    return substr($text, 0, $maxLength) . '...';
+                                } else {
+                                    return $text;
+                                }
+                            }
+
+                            if(mysqli_num_rows($result) > 0) {
+                                while($fetch = $result->fetch_assoc()) {
+                                    $images = json_decode($fetch['images']);
+
+                                    $text = $fetch['landing_des'];
+                                    $trimmedText = trimTextLanding($text);
+
+                                    if (is_array($images) && count($images) > 0) {
+                                        $thumbnail = $images[0];
+                                    }
+                                    echo '
+                                        <div class="w-full bg-white/[90%] p-[5px] rounded-[4px] md:w-[100%] flex flex-col">
+                                            <div class="w-full h-[200px]">
+                                                <img src="../includes/admin/uploaded_landings/' .$thumbnail. '" class="w-full rounded-[6px] h-full object-cover object-center" alt="Product">
+                                            </div>
+                                            <div class="p-[10px] rounded-[4px]">
+                                                <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">' .$fetch['landing_price']. '</div>
+                                                <p class="font-md text-[14px] text-slate-500 select-none text-start">' .$trimmedText. '</p>
+                                                <a href="../admin/landings/single_listing_landing.php?id=' .$fetch['id']. '" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
+                                            </div>
+                                        </div>
+                                    
+                                    
+                                    ';
+                                }
+                            }else {
+                                echo '
+                                    <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">No Landings Added</div>
 
                                 ';
                             }

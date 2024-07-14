@@ -578,6 +578,110 @@
       </div>
     </div>
 
+    <div class="section section-properties">
+      <div class="container">
+          <div class="col-lg-6 text-center mx-auto" style="margin-bottom: 20px;">
+            <h2 class="font-weight-bold text-primary heading">
+              Featured Landings
+            </h2>
+          </div>
+        <div class="row">
+          <?php   
+            $fetch_landings = "SELECT * FROM `landings`";
+
+            $stmt = $connect->prepare($fetch_landings);
+
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+
+            $row_one = 0;
+            $pages_per_row = 3;
+            $fetch_limit = "SELECT * FROM `landings` LIMIT $row_one, $pages_per_row";
+
+            $num_rows = $result->num_rows;
+            $total_pages = ceil($num_rows / $pages_per_row);
+
+
+            if(mysqli_num_rows($result) > 0) {
+              while($fetch = $result->fetch_assoc()) {
+                   // Decode the JSON array
+                  $images = json_decode($fetch['images']);
+
+                  if (is_array($images) && count($images) > 0) {
+                      $thumbnail = $images[0];
+                  }
+                  echo '
+                      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                        <div class="property-item mb-30">
+                          <a href="" class="img">
+                            <img src="./includes/admin/uploaded_landings/' .$thumbnail. '" alt="Image" class="img-fluid" style="width: 100%; height: 370px; object-fit: cover; object-position: 50% 50%;" />
+                          </a>
+
+                          <div class="property-content">
+                            <div class="price mb-2"><span>' .$fetch['landing_price']. '</span></div>
+                            <div>
+                              <span class="d-block mb-2 text-black-50"
+                                >' .$fetch['location']. '</span
+                              >
+                              <span class="city d-block mb-3">' .$fetch['landing_title']. '</span>
+
+                              <div class="specs d-flex mb-4">
+                                <span class="d-block d-flex align-items-center">
+                                  <span class="caption">' .$fetch['landing_size']. '</span>
+                                </span>
+                              </div>
+
+                              <a
+                                href="single-landing.php?land=' .$fetch['id']. '"
+                                class="btn btn-primary py-2 px-3"
+                                >See details</a
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                  
+                  ';
+              }
+          }else {
+              echo '
+                  <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">No Landings</div>
+
+              ';
+          }
+          
+          ?>
+        </div>
+        <div class="row align-items-center py-5">
+          <div class="col-lg-3">Pagination (
+            <?php
+            if(!isset($_GET['page'])) {
+              $page = 1;
+            }else {
+              $page = $_GET['page'];
+            }
+              
+            ?>
+            <?php echo $page ?> of <?php echo $total_pages ?>)</div>
+          <div class="col-lg-6 text-center">
+            <div class="custom-pagination">
+              <?php
+                for($counter = 1; $counter <= $total_pages; $counter ++) {
+                  ?>
+                    <a href="?page=<?php echo $counter ?>"><?php echo $counter ?></a>
+                  <?php
+                }
+              
+              ?>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <div class="site-footer">
       <div class="container">
         <div class="row">

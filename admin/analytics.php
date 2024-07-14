@@ -204,9 +204,21 @@
                                     $total_prices = $row['total_prices'];
 
                                     $formatted_total_prices_cars = rtrim(rtrim($total_prices, '0'), '.');
+
+                                    //cars
+                                    $query = "SELECT SUM(CAST(REPLACE(TRIM(LEADING '$' FROM landing_price), ',', '') AS DECIMAL(10, 2))) AS total_prices FROM `landings`";
+
+                                    $result = $connect->query($query);
+
+
+                                    $row = $result->fetch_assoc();
+
+                                    $total_prices = $row['total_prices'];
+
+                                    $formatted_total_prices_landings = rtrim(rtrim($total_prices, '0'), '.');
                                     
 
-                                    $sum_up = (int)$formatted_total_prices_houses + (int)$formatted_total_prices_apartments + (int)$formatted_total_prices_cars;
+                                    $sum_up = (int)$formatted_total_prices_houses + (int)$formatted_total_prices_apartments + (int)$formatted_total_prices_cars + (int)$formatted_total_prices_landings;
 
 
                             ?>
@@ -261,7 +273,19 @@
                                 $total_rows_cars = $row['total'];
                                 //end
 
-                                $total_listings = $total_rows_houses + $total_rows_apartments + $total_rows_cars;
+                                $query = "SELECT COUNT(*) AS total FROM `landings`";
+                                $stmt = $connect->prepare($query);
+                                
+                                $stmt->execute();
+
+                                
+                                $result = $stmt->get_result();
+                                $row = $result->fetch_assoc();
+
+                                
+                                $total_rows_landings = $row['total'];
+
+                                $total_listings = $total_rows_houses + $total_rows_landings + $total_rows_apartments + $total_rows_cars;
                                 
                                 
                             
@@ -376,6 +400,7 @@
                         <!--Chart-->
                         <div>
                             <canvas id="myPieChart" class="w-full h-full"></canvas>
+                            <p id="noDataMessage" style="display:none;">No items available</p>
                         </div>
                         <!--Chart-->
                     </div>
@@ -453,6 +478,7 @@
     <script src="./js/menu.js"></script>
     <script src="./js/jquery.js"></script>
 
+    Copy code
     <script>
         // Get the context of the canvas element we want to select
         var ctx = document.getElementById('myPieChart').getContext('2d');
@@ -461,41 +487,50 @@
         var housesTotal = <?php echo $total_rows_houses; ?>; // PHP variable for houses total
         var apartmentsTotal = <?php echo $total_rows_apartments; ?>; // PHP variable for apartments total
         var carsTotal = <?php echo $total_rows_cars; ?>; // PHP variable for cars total
+        var landingsTotal = <?php echo $total_rows_landings; ?>; // PHP variable for landings total
         
-        // Create the pie chart
-        var myPieChart = new Chart(ctx, {
-            type: 'pie',  // Specify the chart type
-            data: {
-                labels: ['Cars', 'Houses', 'Apartments'],  // Labels for the pie slices
-                datasets: [{
-                    label: 'Distribution',
-                    data: [carsTotal, housesTotal, apartmentsTotal],  // Data values for each slice
-                    backgroundColor: [
-                        'rgba(54, 162, 235, 0.2)',  // Color for Cars
-                        'rgba(255, 206, 86, 0.2)',  // Color for Houses
-                        'rgba(0, 192, 0, 0.2)'   // Color for Apartments
-                    ],
-                    borderColor: [
-                        'rgba(54, 162, 235, 1)',    // Border color for Cars
-                        'rgba(255, 206, 86, 1)',    // Border color for Houses
-                        'rgba(0, 192, 0, 1)'     // Border color for Apartments
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',  // Position of the legend
-                    },
-                    title: {
-                        display: true,
-                        text: 'Overview of listings'  // Title of the chart
+        // Check if all totals are 0
+        if (housesTotal === 0 && apartmentsTotal === 0 && carsTotal === 0 && landingsTotal === 0) {
+            document.getElementById('myPieChart').style.display = 'none'; // Hide the chart
+            document.getElementById('noDataMessage').style.display = 'block'; // Show the message
+        } else {
+            // Create the pie chart
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',  // Specify the chart type
+                data: {
+                    labels: ['Cars', 'Houses', 'Apartments', 'Landings'],  // Labels for the pie slices
+                    datasets: [{
+                        label: 'Distribution',
+                        data: [carsTotal, housesTotal, apartmentsTotal, landingsTotal],  // Data values for each slice
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.2)',  // Color for Cars
+                            'rgba(255, 206, 86, 0.2)',  // Color for Houses
+                            'rgba(0, 192, 0, 0.2)',     // Color for Apartments
+                            'rgba(255, 99, 132, 0.2)'   // Color for Landings
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',    // Border color for Cars
+                            'rgba(255, 206, 86, 1)',    // Border color for Houses
+                            'rgba(0, 192, 0, 1)',       // Border color for Apartments
+                            'rgba(255, 99, 132, 1)'     // Border color for Landings
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',  // Position of the legend
+                        },
+                        title: {
+                            display: true,
+                            text: 'Overview of listings'  // Title of the chart
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
     </script>
 
     
