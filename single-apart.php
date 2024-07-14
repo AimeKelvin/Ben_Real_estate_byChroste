@@ -244,7 +244,7 @@
               <ul class="list-unstyled links">
                 <li><a href="tel://250788558218">+250 788 558 218</a></li>
                 <li>
-                  <a href="mailto:info@mydomain.com">benrealestate24@gmail.com</a>
+                  <a href="mailto:benrealestate24@gmail.com">benrealestate24@gmail.com</a>
                 </li>
               </ul>
             </div>
@@ -282,7 +282,7 @@
                 <li><a href="./index.php">Home</a></li>
                 <li><a href="./services.php">Services</a></li>
                 <li><a href="./properties.php">Properties</a></li>
-                <li><a href="./">Contact us</a></li>
+                <li><a href="./contact.php">Contact us</a></li>
               </ul>
             </div>
             <!-- /.widget -->

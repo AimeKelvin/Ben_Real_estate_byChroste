@@ -215,8 +215,9 @@
                         </div>
                         <!-- add to sales -->
                         <div>
-                            <form action="../../includes/admin/mark_sold_inc.php" method="POST">
-                                <input type="hidden" name="id" value="<?php echo $output_fetch['id']; ?>">
+                            <form action="../../includes/admin/update_apartment_inc.php" method="POST">
+                                <input type="hidden" name="apartment_id" value="<?php echo $output_fetch['id']; ?>">
+                                <input type="hidden" name="price" value="<?php echo $output_fetch['apartment_price']; ?>">
                                 <button type="submit" class="bg-slate-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold" name="mark_sold_btn">Mark Sold</button>
                             </form> 
                         </div>
