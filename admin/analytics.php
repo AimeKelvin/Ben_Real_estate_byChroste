@@ -81,6 +81,7 @@
 
 </head>
 <body>
+    
     <?php include './mobilemenu.php'; ?>
     <?php
       //Success
@@ -91,6 +92,16 @@
             echo '<span class="success-toast" style="position: absolute; bottom: 20px; left: 20px; padding: 20px; border-radius: 10px; color: #fff; font-weight: bold; z-index: 20; background-color: rgb(76, 211, 227); margin-left: 10px; margin-top: 10px;">' . htmlspecialchars($msg) . '</span>';
 
             unset($_GET['success']);
+    
+        }
+
+        if (isset($_GET['error'])) {
+            // Decode the message
+            $msg = urldecode($_GET['error']);
+
+            echo '<span class="error-cont" style="position: absolute; bottom: 20px; left: 20px; padding: 20px; border-radius: 10px; color: #fff; font-weight: bold; z-index: 20; background-color: rgb(255, 76, 76); margin-left: 10px; margin-top: 10px;">' . htmlspecialchars($msg) . '</span>';
+
+            unset($_GET['error']);
     
         }
     ?>
@@ -506,13 +517,13 @@
                             'rgba(54, 162, 235, 0.2)',  // Color for Cars
                             'rgba(255, 206, 86, 0.2)',  // Color for Houses
                             'rgba(0, 192, 0, 0.2)',     // Color for Apartments
-                            'rgba(255, 99, 132, 0.2)'   // Color for Landings
+                            'rgb(255, 178, 44)'   // Color for Landings
                         ],
                         borderColor: [
                             'rgba(54, 162, 235, 1)',    // Border color for Cars
                             'rgba(255, 206, 86, 1)',    // Border color for Houses
                             'rgba(0, 192, 0, 1)',       // Border color for Apartments
-                            'rgba(255, 99, 132, 1)'     // Border color for Landings
+                            'rgb(255, 178, 44)'     // Border color for Landings
                         ],
                         borderWidth: 1
                     }]

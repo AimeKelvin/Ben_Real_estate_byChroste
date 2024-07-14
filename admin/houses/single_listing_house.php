@@ -9,7 +9,7 @@
     if(!$admin_id || empty($admin_id)) {
         $error_msg = "You have to login";
         $encoded_error_msg = urlencode($error_msg);
-        header("location: login.php?error=$encoded_error_msg");
+        header("location: ../login.php?error=$encoded_error_msg");
         exit();
     }
 
@@ -144,7 +144,7 @@
                     </div>
                 </div>
                 <div class="pl-[10px]">
-                    <form action="../includes/admin/logout_inc.php" method="POST">
+                    <form action="../../includes/admin/logout_inc.php" method="POST">
                         <button type="submit" class="bg-red-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold" name="logout_btn">Logout</button>
                     </form>
                 </div>
