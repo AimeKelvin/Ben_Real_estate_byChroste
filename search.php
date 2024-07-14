@@ -130,119 +130,116 @@
           </div>
         <div class="row">
             <?php
-                if (isset($_GET['q'])) {
-                    include './config/db.php';
+              if (isset($_GET['q'])) {
+                  $searchQuery = $connect->real_escape_string($_GET['q']);
+                  $query = "
+                      SELECT 'car' AS type, id, car_name AS title, location AS location, car_price AS price, images, NULL AS number_rooms, NULL AS number_bedrooms FROM cars WHERE car_name LIKE '%$searchQuery%' OR location LIKE '%$searchQuery%'
+                      UNION
+                      SELECT 'apartment' AS type, id, apartment_title AS title, location AS location, apartment_price AS price, images, number_rooms, number_bedrooms FROM apartments WHERE apartment_title LIKE '%$searchQuery%' OR location LIKE '%$searchQuery%'
+                      UNION
+                      SELECT 'house' AS type, id, house_title AS title, location AS location, house_price AS price, images, number_rooms, number_bedrooms FROM houses WHERE house_title LIKE '%$searchQuery%' OR location LIKE '%$searchQuery%'
+                      UNION
+                      SELECT 'landing' AS type, id, landing_title AS title, location AS location, landing_price AS price, images, NULL AS number_rooms, NULL AS number_bedrooms FROM landings WHERE landing_title LIKE '%$searchQuery%' OR location LIKE '%$searchQuery%'
+                  ";
+                  $result = $connect->query($query);
 
-                    $searchQuery = $connect->real_escape_string($_GET['q']); 
-                    $query = "
-                        SELECT 'car' AS type, id, car_name AS title, location AS location, car_price AS price, images, NULL AS number_rooms, NULL AS number_bedrooms FROM cars WHERE car_name LIKE '%$searchQuery%'
-                        UNION
-                        SELECT 'apartment' AS type, id, apartment_title AS title, location AS location, apartment_price AS price, images, number_rooms, number_bedrooms FROM apartments WHERE apartment_title LIKE '%$searchQuery%'
-                        UNION
-                        SELECT 'house' AS type, id, house_title AS title, location AS location, house_price AS price, images, number_rooms, number_bedrooms FROM houses WHERE house_title LIKE '%$searchQuery%'
-                    ";
-                    $result = $connect->query($query);
+                  if ($result->num_rows > 0) {
+                      while ($row = $result->fetch_assoc()) {
+                          // Decode the JSON array of images
+                          $images = json_decode($row['images'], true);
+                          $thumbnail = (is_array($images) && count($images) > 0) ? $images[0] : 'default.jpg';
 
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            // Decode the JSON array of images
-                            $images = json_decode($row['images'], true);
-                            $thumbnail = (is_array($images) && count($images) > 0) ? $images[0] : 'default.jpg';
+                          // Determine the image path based on the type of listing
+                          $imagePath = '';
+                          switch ($row['type']) {
+                              case 'car':
+                                  $imagePath = "./includes/admin/uploaded_cars/" . $thumbnail;
+                                  break;
+                              case 'apartment':
+                                  $imagePath = "./includes/admin/uploaded_apartments/" . $thumbnail;
+                                  break;
+                              case 'house':
+                                  $imagePath = "./includes/admin/uploaded_houses/" . $thumbnail;
+                                  break;
+                              case 'landing':
+                                  $imagePath = "./includes/admin/uploaded_landings/" . $thumbnail;
+                                  break;
+                          }
 
-                            // Determine the image path based on the type of listing
-                            $imagePath = '';
-                            switch ($row['type']) {
-                                case 'car':
-                                    $imagePath = "./includes/admin/uploaded_cars/" . $thumbnail;
-                                    break;
-                                case 'apartment':
-                                    $imagePath = "./includes/admin/uploaded_apartments/" . $thumbnail;
-                                    break;
-                                case 'house':
-                                    $imagePath = "./includes/admin/uploaded_houses/" . $thumbnail;
-                                    break;
-                            }
+                          // Determine the price field based on the type of listing
+                          $price = '';
+                          switch ($row['type']) {
+                              case 'car':
+                              case 'apartment':
+                              case 'house':
+                              case 'landing':
+                                  $price = $row['price'];
+                                  break;
+                          }
 
-                            // Determine the price field based on the type of listing
-                            $price = '';
-                            switch ($row['type']) {
-                                case 'car':
-                                    $price = $row['price'];
-                                    break;
-                                case 'apartment':
-                                    $price = $row['price'];
-                                    break;
-                                case 'house':
-                                    $price = $row['price'];
-                                    break;
-                            }
+                          // Determine the title field based on the type of listing
+                          $title = '';
+                          switch ($row['type']) {
+                              case 'car':
+                              case 'apartment':
+                              case 'house':
+                              case 'landing':
+                                  $title = $row['title'];
+                                  break;
+                          }
 
-                            // Determine the title field based on the type of listing
-                            $title = '';
-                            switch ($row['type']) {
-                                case 'car':
-                                    $title = $row['title'];
-                                    break;
-                                case 'apartment':
-                                    $title = $row['title'];
-                                    break;
-                                case 'house':
-                                    $title = $row['title'];
-                                    break;
-                            }
+                          // Determine the location field based on the type of listing
+                          $location = '';
+                          switch ($row['type']) {
+                              case 'car':
+                              case 'apartment':
+                              case 'house':
+                              case 'landing':
+                                  $location = $row['location'];
+                                  break;
+                          }
 
-                            // Determine the location field based on the type of listing
-                            $location = '';
-                            switch ($row['type']) {
-                                case 'car':
-                                    $location = $row['location'];
-                                    break;
-                                case 'apartment':
-                                    $location = $row['location'];
-                                    break;
-                                case 'house':
-                                    $location = $row['location'];
-                                    break;
-                            }
+                          // Determine the details link based on the type of listing
+                          $detailsLink = '';
+                          switch ($row['type']) {
+                              case 'car':
+                                  $detailsLink = "single-car.php?car=" . $row['id'];
+                                  break;
+                              case 'apartment':
+                                  $detailsLink = "single-apartment.php?apartment=" . $row['id'];
+                                  break;
+                              case 'house':
+                                  $detailsLink = "single-house.php?house=" . $row['id'];
+                                  break;
+                              case 'landing':
+                                  $detailsLink = "single-landing.php?landing=" . $row['id'];
+                                  break;
+                          }
 
-                            // Determine the details link based on the type of listing
-                            $detailsLink = '';
-                            switch ($row['type']) {
-                                case 'car':
-                                    $detailsLink = "single-car.php?car=" . $row['id'];
-                                    break;
-                                case 'apartment':
-                                    $detailsLink = "single-apartment.php?apartment=" . $row['id'];
-                                    break;
-                                case 'house':
-                                    $detailsLink = "single-house.php?house=" . $row['id'];
-                                    break;
-                            }
+                          echo '
+                              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                  <div class="property-item mb-30">
+                                      <a href="' . $detailsLink . '" class="img">
+                                          <img src="' . $imagePath . '" alt="Image" class="img-fluid" style="width: 100%; height: 370px; object-fit: cover; object-position: 50% 50%;" />
+                                      </a>
 
-                            echo '
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                    <div class="property-item mb-30">
-                                        <a href="' . $detailsLink . '" class="img">
-                                            <img src="' . $imagePath . '" alt="Image" class="img-fluid" style="width: 100%; height: 370px; object-fit: cover; object-position: 50% 50%;" />
-                                        </a>
-
-                                        <div class="property-content">
-                                            <div class="price mb-2"><span>' . htmlspecialchars($price) . '</span></div>
-                                            <div>
-                                                <span class="d-block mb-2 text-black-50">' .$location. '</span>
-                                                <span class="city d-block mb-3">' . htmlspecialchars($title) . '</span>
-                                                <a href="' . $detailsLink . '" class="btn btn-primary py-2 px-3">See details</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ';
-                        }
-                    } else {
-                        echo "<p>No results found for '" . htmlspecialchars($searchQuery) . "'</p>";
-                    }
-                }
-            ?>
+                                      <div class="property-content">
+                                          <div class="price mb-2"><span>' . htmlspecialchars($price) . '</span></div>
+                                          <div>
+                                              <span class="d-block mb-2 text-black-50">' . $location . '</span>
+                                              <span class="city d-block mb-3">' . htmlspecialchars($title) . '</span>
+                                              <a href="' . $detailsLink . '" class="btn btn-primary py-2 px-3">See details</a>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          ';
+                      }
+                  } else {
+                      echo "<p>No results found for '" . htmlspecialchars($searchQuery) . "'</p>";
+                  }
+              }
+              ?>
 
         </div>
     </div>

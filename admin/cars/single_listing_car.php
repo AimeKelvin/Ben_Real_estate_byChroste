@@ -215,7 +215,7 @@
                         <!-- add to sales -->
                         <div>
                             <form action="../../includes/admin/update_car_inc.php" method="POST">
-                                <input type="hidden" name="apartment_id" value="<?php echo $output_fetch['id']; ?>">
+                                <input type="hidden" name="car_id" value="<?php echo $output_fetch['id']; ?>">
                                 <input type="hidden" name="price" value="<?php echo $output_fetch['car_price']; ?>">
                                 <button type="submit" class="bg-slate-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold" name="mark_sold_btn">Mark Sold</button>
                             </form> 
@@ -267,7 +267,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div><button type="submit" name="update_car_btn" class="bg-blue-500 w-full pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold">Add Product</button></div>
+                                    <div><button type="submit" name="update_car_btn" class="bg-blue-500 w-full pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold">Update Car</button></div>
                                 </div>
                             </div>
                         </form>

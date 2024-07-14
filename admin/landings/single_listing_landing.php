@@ -38,11 +38,30 @@
     $defaultProfile = strtoupper($firstCharacter.$lastCharacter);
 
 
+    if(isset($_GET['id'])) {
+        $car_id = $_GET['id'];
 
+        //fetch the details for the car
+        $sql = "SELECT * FROM `landings` WHERE `id` = ?";
+        $stmt = $connect->prepare($sql);
 
+        $stmt->bind_param('i', $car_id);
+        $stmt->execute();
 
+        $output = $stmt->get_result();
+        $output_fetch = $output->fetch_assoc();
 
+        if(!$output_fetch) {
+            header('location: error.php');
+            exit();
+        }
 
+        $stmt->close();
+
+    }else{
+        header('location: error.php');
+        exit();
+    }
 
 ?>
 
@@ -109,7 +128,7 @@
             <div class="hover:bg-slate-200 cursor-pointer p-[10px] rounded-[6px]"><a href="../history.php" class="font-bold text-[16px] text-slate-400 flex flex-row items-center space-x-[6px]"><i class="fa-solid fa-trash text-[16px] font-bold"></i><span></span> History</a></div>
         </div>
     </div>
-    
+
     <div class="w-full h-[100vh]">
         <!--Navigation-->
         <div class="w-full h-[80px] border-[1px] border-solid border-gray-300 bg-white p-[10px] fixed top-0 left-0 right-0 flex flex-row justify-between items-center">
@@ -149,17 +168,65 @@
 
             <!--Right Section-->
             <div class="h-full w-full p-[10px] md:p-[40px] pb-[50px] overflow-y-scroll md:w-[85%]">
-                <div class="text-[18px] font-black text-slate-300 select-none mb-[30px]">Admin Creation Page</div>
-                <div class="w-full flex flex-row items-center space-x-[20px] mt-[10px] mb-[20px]">
-                    <div><a href="../cars/create.php" class="bg-blue-300 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-car text-white font-bold"></i><span></span> <span class="hidden md:inline-flex">Add Vehicle</span></a></div>
-                    <div><a href="../houses/create.php" class="bg-blue-300 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-house text-white font-bold"></i><span></span> <span class="hidden md:inline-flex">Add House</span></a></div>
-                    <div><a href="#" class="bg-blue-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-building text-white font-bold"></i><span></span> <span class="hidden md:inline-flex">Add Apartment</a></span></div>
-                    <div><a href="../landings/create.php" class="bg-blue-300 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold"><i class="fa-solid fa-house text-white font-bold"></i><span></span> <span class="hidden md:inline-flex">Add Landing</span></a></div>
+                <div class="text-[18px] font-black text-slate-300 select-none mb-[30px]"><?php echo $output_fetch['landing_title']; ?></div>
+                <?php
+                    $car_id = $_GET['id'];
+
+                    //fetch the details for the car
+                    $sql = "SELECT * FROM `landings` WHERE `id` = ?";
+                    $stmt = $connect->prepare($sql);
+
+                    $stmt->bind_param('i', $car_id);
+                    $stmt->execute();
+
+                    $output = $stmt->get_result();
+                    $output_fetch = $output->fetch_assoc();
+                    
+                    echo '<div class="grid grid-cols-1 md:grid-cols-4 gap-4 w-full p-[10px] border-[2px] border-gray-300 border-solid">';
+
+                        foreach(json_decode($output_fetch['images']) as $image) {
+                                echo '
+                                    <div class="w-full h-[200px] rounded-[12px]">
+                                        <img src="../../includes/admin/uploaded_landings/' .$image. '" class="w-full h-full object-cover object-center" alt="Image 1">
+                                    </div>
+                                ';
+                        }
+                        
+                    echo '</div>';
+
+                ?>
+                <div class="mt-[30px] w-full border-[2px] border-gray-300 border-solid p-[12px] rounded-[12px]">
+                    <p class="text-slate-400 font-bold text-[18px]">Landing Title: <span class="text-blue-400"><?php echo $output_fetch['landing_title'] ?></span></p>
+                    <p class="text-slate-400 font-bold text-[18px]">Price: <span class="text-blue-400"><?php echo $output_fetch['landing_price'] ?></span></p>
+                    <p class="text-slate-400 font-bold text-[18px]">Description: <span class="text-blue-400"><?php echo $output_fetch['landing_des'] ?></span></p>
+                    <p class="text-slate-400 font-bold text-[18px]">Location: <span class="text-blue-400"><?php echo $output_fetch['location'] ?></span></p>
+                    <p class="text-slate-400 font-bold text-[18px]">Size: <span class="text-blue-400"><?php echo $output_fetch['landing_size'] ?></span></p>
                 </div>
+
+                <div class="mt-[30px]">
+                    <div class="flex space-x-[20px] items-center">
+                        <div>
+                            <form action="../../includes/admin/update_landing_inc.php" method="POST">
+                                <input type="hidden" name="id" value="<?php echo $output_fetch['id']; ?>">
+                                <button type="submit" class="bg-red-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold" name="delete_listing_btn">Delete</button>
+                            </form> 
+                        </div>
+                        <!-- add to sales -->
+                        <div>
+                            <form action="../../includes/admin/update_landing_inc.php" method="POST">
+                                <input type="hidden" name="landing_id" value="<?php echo $output_fetch['id']; ?>">
+                                <input type="hidden" name="price" value="<?php echo $output_fetch['landing_price']; ?>">
+                                <button type="submit" class="bg-slate-500 pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold" name="mark_sold_btn">Mark Sold</button>
+                            </form> 
+                        </div>
+                        <!-- add to sales -->
+                    </div>
+                </div>
+
                 <!--No of images-->
-                <div id="images-number" class="p-[4px] mb-[3px] flex justify-center items-center w-[40px] bg-blue-500 rounded-full h-[40px] font-bold text-[16px] text-white">0</div>
+                <div id="images-number" class="p-[4px] mb-[3px] mt-[20px] flex justify-center items-center w-[40px] bg-blue-500 rounded-full h-[40px] font-bold text-[16px] text-white">0</div>
                 <!--No of images-->
-                <div class="flex flex-col space-x-[0px] w-full space-y-[10px] justify-between items-start md:flex-row md:space-x-[20px] md:space-y-[0px]">
+                <div class="flex flex-col mt-[20px] space-x-[0px] w-full space-y-[10px] justify-between items-start md:flex-row md:space-x-[20px] md:space-y-[0px]">
                     <div id="images-cont" class="w-full md:w-[50%] border-[1px] border-solid border-gray-300 rounded-[15px] h-[540px] flex flex-col justify-center items-center p-[20px]">
                         <div class="flex flex-col justify-center">
                             <div class="text-[18px] font-bold text-slate-300 text-center select-none mb-[30px]">File Upload</div>
@@ -169,119 +236,42 @@
                     </div>
                     <div class="w-full md:w-[50%]">
                         <div class="text-[16px] font-bold text-slate-300 text-center select-none mb-[10px]">Upload Product Info</div>
-                        <form action="../../includes/admin/upload_apartment_inc.php" method="POST" enctype="multipart/form-data">
+                        <form action="../../includes/admin/update_landing_inc.php" method="POST" enctype="multipart/form-data">
                             <div class="flex flex-col space-y-[12px]">
-                                <div><input type="file" class="hidden" id="file" onchange="preview()" name="apartment_image[]" accept=".jpg, .jpeg, .png" multiple></div>
+                                <div><input type="text" class="hidden" name="id" value="<?php echo $output_fetch['id'] ?>"></div>
+                                <div><input type="file" class="hidden" id="file" onchange="preview()" name="landing_image[]" accept=".jpg, .jpeg, .png" multiple></div>
                                 <div>
-                                    <input type="text" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0" placeholder="Apartment Title" name="apartment_title">
+                                    <input type="text" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0" placeholder="Landing Title" value="<?php echo $output_fetch['landing_title'] ?>" name="landing_title">
                                 </div>
                                 <div>
-                                    <input type="text" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0" value="$ " placeholder="Price" name="price">
+                                    <input type="text" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0" placeholder="Price" value="<?php echo $output_fetch['landing_price'] ?>" name="price">
                                 </div>
                                 <div>
-                                    <input type="text" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0" placeholder="Location" name="location">
+                                    <input type="text" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0" placeholder="Location" value="<?php echo $output_fetch['location'] ?>" name="location">
                                 </div>
                                 <div>
-                                    <input list="rooms" name="number_rooms" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0" placeholder="Number of rooms">
-                                    <datalist id="rooms">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </datalist>
+                                    <input type="text" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0" placeholder="Size" value="<?php echo $output_fetch['landing_size'] ?>" name="size">
                                 </div>
+                                
                                 <div>
-                                    <input list="bed_rooms" name="number_bed_rooms" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0" placeholder="Number of Bed rooms">
-                                    <datalist id="bed_rooms">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </datalist>
+                                    <textarea name="description" placeholder="Product Description" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full h-[150px] pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0"><?php echo $output_fetch['landing_des'] ?></textarea>
                                 </div>
+                               
                                 <div>
-                                    <textarea name="description" placeholder="Product Description" class="border-[1px] border-solid border-gray-300 text-slate-600 w-full h-[150px] pl-[15px] pr-[10px] pt-[10px] pb-[10px] rounded-[6px] focus:outline-[2px] focus:outline-offset-[2px] focus:outline-solid focus:outline-blue-500 outline-0"></textarea>
-                                </div>
-                                <div class="flex flex-row no-wrap space-x-[40px] items-center">
-                                    <div class="flex flex-row items-center space-x-[6px]">
-                                        <input type="radio" id="rent" value="rent" name="status">
-                                        <label for="rent" class="text-slate-500 text-md">For Rent</label>
-                                    </div>
-                                    <div class="flex flex-row items-center space-x-[6px]">
-                                        <input type="radio" id="sale" value="sale" name="status">
-                                        <label for="sale" class="text-slate-500 text-md">For Sale</label>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div><button type="submit" name="add_apartment_btn" class="bg-blue-500 w-full pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold">Add Product</button></div>
+                                    <div><button type="submit" name="update_landing_btn" class="bg-blue-500 w-full pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold">Update Landing</button></div>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div>
-                    <div class="text-[18px] font-black text-slate-300 select-none mt-[20px] mb-[30px]">Recent Added Apartments</div>
-                    <div class="grid grid-cols-1 md:grid-cols-4 space-x-[4px]">
-                        <?php
-                            $fetch_apartments = "SELECT * FROM `apartments`";
-
-                            $stmt = $connect->prepare($fetch_apartments);
-    
-                            $stmt->execute();
-    
-                            $result = $stmt->get_result();
-
-                            function trimText($text, $maxLength = 30) {
-                                if (strlen($text) > $maxLength) {
-                                    return substr($text, 0, $maxLength) . '...';
-                                } else {
-                                    return $text;
-                                }
-                            }
-
-                            if(mysqli_num_rows($result) > 0) {
-
-                                while($fetch = $result->fetch_assoc()) {
-                                    $images = json_decode($fetch['images']);
-
-                                    $text = $fetch['apartment_des'];
-                                    $trimmedText = trimText($text);
-
-                                    if (is_array($images) && count($images) > 0) {
-                                        $thumbnail = $images[0];
-                                    }
-                                    echo '
-                                        <div class="w-full bg-white/[90%] p-[5px] rounded-[4px] md:w-[100%] flex flex-col">
-                                            <div class="w-full h-[200px]">
-                                                <img src="../../includes/admin/uploaded_apartments/' .$thumbnail. '" class="w-full rounded-[6px] h-full object-cover object-center" alt="Product">
-                                            </div>
-                                            <div class="p-[10px] rounded-[4px]">
-                                                <div class="text-[18px] font-black text-slate-900 select-none md-[4px]">' .$fetch['apartment_price']. '</div>
-                                                <p class="font-md text-[14px] text-slate-500 select-none text-start">' .$trimmedText. '</p>
-                                                <a href="single_listing_apartment.php?id=' .$fetch['id']. '" class="font-md text-[14px] text-blue-300 select-none text-start">View Listing <span></span><i class="fa-solid fa-arrow-right"></i></a>
-                                            </div>
-                                        </div>
-                                    
-                                    
-                                    ';
-                                }
-                            }else {
-                                echo '
-                                    <div class="text-[18px] text-center font-black text-slate-900 select-none md-[4px]">No Apartments Added</div>
-
-                                ';
-                            }
-                        
-                        ?>
-
-                    </div>
-                </div>
+                
+                
             </div>
             <!--Right Section-->
+
         </div>
         <!--Main content-->
     </div>
-    
     <script src="../js/main.js"></script>
     <script src="../js/menu.js"></script>
     <script src="../js/jquery.js"></script>

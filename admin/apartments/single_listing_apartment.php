@@ -283,7 +283,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div><button type="submit" name="update_apartment_btn" class="bg-blue-500 w-full pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold">Add Product</button></div>
+                                    <div><button type="submit" name="update_apartment_btn" class="bg-blue-500 w-full pr-[12px] pl-[12px] pt-[8px] pb-[8px] rounded-[14px] focus:outline-[2px] outline-offset-2 outline-red-500 text-white font-bold">Update Apartment</button></div>
                                 </div>
                             </div>
                         </form>
