@@ -206,13 +206,13 @@
                                   $detailsLink = "single-car.php?car=" . $row['id'];
                                   break;
                               case 'apartment':
-                                  $detailsLink = "single-apartment.php?apartment=" . $row['id'];
+                                  $detailsLink = "single-apartment.php?apart=" . $row['id'];
                                   break;
                               case 'house':
                                   $detailsLink = "single-house.php?house=" . $row['id'];
                                   break;
                               case 'landing':
-                                  $detailsLink = "single-landing.php?landing=" . $row['id'];
+                                  $detailsLink = "single-landing.php?land=" . $row['id'];
                                   break;
                           }
 
