@@ -233,16 +233,15 @@
               
 
               <ul class="list-unstyled social">
-                <li>
-                  <a href="#"><span class="icon-instagram"></span></a>
-                </li>
-                <li>
-                  <a href="#"><span class="icon-youtube"></span></a>
-                </li>
-                <li>
-                  <a href="#"><span class="icon-facebook"></span></a>
-                </li>
-               
+                  <li class="list-inline-item">
+                    <a href="https://youtube.com/@benshakondorealestateagent6021?si=u57Hif2Tc6ZE2tZV"><span class="icon-facebook"></span></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="https://youtube.com/@benshakondorealestateagent6021?si=u57Hif2Tc6ZE2tZV"><span class="icon-youtube"></span></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="https://www.instagram.com/benrealestate2024?igsh=MTN5dWx5bDVrbnJ3MQ%3D%3D"><span class="icon-instagram"></span></a>
+                  </li>
               </ul>
             </div>
             <!-- /.widget -->
